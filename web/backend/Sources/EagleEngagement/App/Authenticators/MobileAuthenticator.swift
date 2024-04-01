@@ -29,22 +29,24 @@ struct UserToken: Content, Authenticatable, JWTPayload {
     }
 }
 
-struct StudentUserAuthenticator : JWTAuthenticator {
+struct StudentUserAuthenticator : AsyncJWTAuthenticator {
+    typealias Payload = UserToken;
 
-    func authenticate(jwt: UserToken, for req: Request) -> EventLoopFuture<Void> {
-        StudentUser.query(on: req.db)
+    func authenticate(jwt: UserToken, for request: Request) async throws {
+        let userOpt = try await StudentUser.query(on: request.db)
           .join(User.self, on: \StudentUser.$user.$id == \User.$id)
           .filter(User.self, \.$id == jwt.userId)
-          .first()
-          .map {
-              do {
-                  if let user = $0, user.expiredNum == jwt.expiredNum {
-                      req.auth.login(jwt);
-                  }
-              } catch { }
-          }
+          .first();
 
-        return req.eventLoop.makeSucceededFuture(());
+        guard let user = userOpt else {
+            throw Abort(.unauthorized);
+        }
+        
+        guard user.expiredNum == jwt.expiredNum else {
+            throw Abort(.unauthorized);
+        }
+        
+        request.auth.login(jwt);
     }
     
 }

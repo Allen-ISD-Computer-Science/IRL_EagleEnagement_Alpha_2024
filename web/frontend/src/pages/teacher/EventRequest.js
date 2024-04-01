@@ -8,84 +8,84 @@ import TeacherNav from "../../components/TeacherNav";
 import { Button, MenuItem, Select, TextField, Autocomplete } from "@mui/material";
 
 function EventRequestPage(props) {
-    const [requestInfo, setRequestInfo] = React.useState({});
-    const [isDisabled, setDisabled] = React.useState(false);
-    const [eventTypes, setEventTypes] = React.useState([]);
+  const [requestInfo, setRequestInfo] = React.useState({});
+  const [isDisabled, setDisabled] = React.useState(false);
+  const [eventTypes, setEventTypes] = React.useState([]);
 
-    const submitRequest = async () => {
-	const urlPath = `${process.env.PUBLIC_URL}/faculty/api/requestEvent`
-	
-	const filteredInfo = Object.assign({}, requestInfo);
-	
-	const keys = ["name", "eventType", "description", "location", "startDate", "endDate"];
-	for (let i = 0; i < keys.length; i++) {
-	    const key = keys[i];
-	    if ((filteredInfo[key] === "" || filteredInfo[key] === null || filteredInfo[key] === -1)) {
-		toast.error(`${key} cannot be empty!`, {
-		    position: "top-right",
-		    autoClose: 2000,
-		    closeOnClick: true,
-		    pauseOnHover: true,
-		    theme: "light"
-		});
-		return;
-	    }
-	}
+  const submitRequest = async () => {
+    const urlPath = `${process.env.PUBLIC_URL}/faculty/api/requestEvent`
 
-	console.log(filteredInfo.startDate.toISOString());
-	console.log(filteredInfo.endDate.toISOString());
-	
-	filteredInfo.startDate = filteredInfo.startDate.toISOString().split('.')[0] + "Z";
-	filteredInfo.endDate = filteredInfo.startDate.split('T')[0] + "T" + filteredInfo.endDate.toISOString().split("T")[1].split(".")[0] + "Z";
+    const filteredInfo = Object.assign({}, requestInfo);
 
-	try {
-	    setDisabled(true);
-	    const res = await fetch(urlPath, {
-		method: "POST",
-		headers: {
-		    "Content-Type": "application/json",
-		    "Accept": "application/json"
-		},
-		body: JSON.stringify(filteredInfo)
-	    });
-
-	    if (res.status === 200) {
-		toast.success(`Requested event!`, {
-		    position: "top-right",
-		    autoClose: 2000,
-		    closeOnClick: true,
-		    pauseOnHover: true,
-		    theme: "light"
-		});
-	    } else {
-		toast.error(res.statusText, {
-		    position: "top-right",
-		    autoClose: 2000,
-		    closeOnClick: true,
-		    pauseOnHover: true,
-		    theme: "light"
-		});
-		setDisabled(false);
-	    }
-	} catch (e) {
-	    console.error(e);	    
-	}
+    const keys = ["name", "eventType", "description", "location", "startDate", "endDate"];
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      if ((filteredInfo[key] === "" || filteredInfo[key] === null || filteredInfo[key] === -1)) {
+        toast.error(`${key} cannot be empty!`, {
+          position: "top-right",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "light"
+        });
+        return;
+      }
     }
-    
+
+    console.log(filteredInfo.startDate.toISOString());
+    console.log(filteredInfo.endDate.toISOString());
+
+    filteredInfo.startDate = filteredInfo.startDate.toISOString().split('.')[0] + "Z";
+    filteredInfo.endDate = filteredInfo.startDate.split('T')[0] + "T" + filteredInfo.endDate.toISOString().split("T")[1].split(".")[0] + "Z";
+
+    try {
+      setDisabled(true);
+      const res = await fetch(urlPath, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(filteredInfo)
+      });
+
+      if (res.status === 200) {
+        toast.success(`Requested event!`, {
+          position: "top-right",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "light"
+        });
+      } else {
+        toast.error(res.statusText, {
+          position: "top-right",
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          theme: "light"
+        });
+        setDisabled(false);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   return (
     <div className="flex flex-row items-stretch min-h-[100vh]">
-	<TeacherNav selected="event-request" />
-	<ToastContainer
-            position="top-right"
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop
-            closeOnClick
-            pauseOnFocusLoss
-            pauseOnHover
-            theme="light"
-          />
-	<div className="flex flex-col items-stretch w-full">
+      <TeacherNav selected="event-request" />
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="light"
+      />
+      <div className="flex flex-col items-stretch w-full">
         <div className="flex flex-col justify-center text-white text-5xl font-bold bg-blue-950 w-full pl-12 pr-12 items-start max-md:text-4xl max-md:px-5 h-[150px] max-md:max-h-[100px]">
           <span className="my-auto">
             Event Request
@@ -102,9 +102,9 @@ function EventRequestPage(props) {
             <TextField
               className="border bg-gray-100 rounded-xl w-full"
               placeholder="Event Name"
-		name="name"
-		value={requestInfo?.name}
-		onChange={(e) => {
+              name="name"
+              value={requestInfo?.name}
+              onChange={(e) => {
                 setRequestInfo({
                   ...requestInfo,
                   name: e.currentTarget.value
@@ -147,9 +147,9 @@ function EventRequestPage(props) {
                 className="border bg-gray-100 rounded-xl w-full"
                 placeholder="Description"
                 name="description"
-                  maxLength={255}
-		  value={requestInfo?.description}
-                  onChange={(e) => {
+                maxLength={255}
+                value={requestInfo?.description}
+                onChange={(e) => {
                   setRequestInfo({
                     ...requestInfo,
                     description: e.currentTarget.value
@@ -159,7 +159,7 @@ function EventRequestPage(props) {
 
               />
             </div>
-              
+
           </div>
 
           {/* Right column */}
@@ -168,17 +168,17 @@ function EventRequestPage(props) {
               Event Location (include address)
             </label>
             <TextField
-                className="border bg-gray-100 rounded-xl w-full"
-                placeholder="Location Description"
-                name="location-description"
-                maxLength={1000}
-		value={requestInfo?.location}
-                onChange={(e) => {
-                  setRequestInfo({
-                    ...requestInfo,
-                    location: e.currentTarget.value
-                  })
-                }}
+              className="border bg-gray-100 rounded-xl w-full"
+              placeholder="Location Description"
+              name="location-description"
+              maxLength={1000}
+              value={requestInfo?.location}
+              onChange={(e) => {
+                setRequestInfo({
+                  ...requestInfo,
+                  location: e.currentTarget.value
+                })
+              }}
 
             />
 
@@ -186,22 +186,22 @@ function EventRequestPage(props) {
               Start Date & Time
             </label>
             <DateTimePicker
-		className="border bg-gray-100 rounded-xl w-full"
-		value={dayjs(requestInfo?.startDate)}
-		onChange={(newValue) => {
-                    setRequestInfo({
-			...requestInfo,
-			startDate: newValue
-                    })
-		}}
+              className="border bg-gray-100 rounded-xl w-full"
+              value={dayjs(requestInfo?.startDate)}
+              onChange={(newValue) => {
+                setRequestInfo({
+                  ...requestInfo,
+                  startDate: newValue
+                })
+              }}
             />
 
             <label className="block text-gray-700 text-sm font-bold mb-2 mt-4" htmlFor="endTime">
               End Time
             </label>
             <TimePicker
-		className="border bg-gray-100 rounded-xl w-full"
-		value={dayjs(requestInfo?.endDate)}
+              className="border bg-gray-100 rounded-xl w-full"
+              value={dayjs(requestInfo?.endDate)}
               onChange={(newValue) => {
                 setRequestInfo({
                   ...requestInfo,
@@ -219,9 +219,9 @@ function EventRequestPage(props) {
               {/* Submit button */}
               <Button
                 variant="contained"
-                  color="success"
-		  onClick={() => submitRequest() }
-		  disabled={isDisabled}
+                color="success"
+                onClick={() => submitRequest()}
+                disabled={isDisabled}
               >
                 Submit
               </Button>

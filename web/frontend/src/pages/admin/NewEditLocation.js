@@ -133,11 +133,13 @@ function NewEditLocationPage(props) {
   }
 
   const updateMapValues = (latlng, radius) => {
-    setLocationInfo({
-      ...locationInfo,
-      latitude: latlng.lat,
-      longitude: latlng.lng,
-      radius: radius
+    setLocationInfo((locInfo) => {
+      return {
+        ...locInfo,
+        latitude: latlng.lat,
+        longitude: latlng.lng,
+        radius: radius
+      }
     });
   }
 

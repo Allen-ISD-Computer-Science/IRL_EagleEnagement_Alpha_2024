@@ -20,12 +20,22 @@ struct AdminController : RouteCollection {
         adminProtectedRoutes.get("locations", "new", use: serveIndex);
         adminProtectedRoutes.get("locations", "edit", ":id", use:serveIndex);
         
+        adminProtectedRoutes.get("rewards", use: serveIndex);
+        adminProtectedRoutes.get("rewards", "new", use: serveIndex);
+        adminProtectedRoutes.get("rewards", "edit", ":id", use:serveIndex);
+
         adminProtectedRoutes.get("event-requests", use: serveIndex);
         adminProtectedRoutes.get("review-checkins", use: serveIndex);
         adminProtectedRoutes.get("review-missing-points", use: serveIndex);
 
         let apiRoutes = adminProtectedRoutes.grouped("api"); // /admin/api
         apiRoutes.post("eventTypes", use: fetchEventTypes);
+
+        apiRoutes.post("users", use: fetchUsers);
+        apiRoutes.post("users", "modify", use: modifyUsers);
+        apiRoutes.post("users", "estimateCount", use: estimateCount);
+        apiRoutes.post("user", ":id", "modifyPoints", use: modifyUser);
+
         apiRoutes.post("events", use: fetchEvents);
         apiRoutes.post("event", ":id", use: fetchEvent);
         apiRoutes.post("event", ":id", "edit", use: editEvent);
@@ -33,16 +43,17 @@ struct AdminController : RouteCollection {
 
         apiRoutes.post("eventRequests", use: fetchEventRequests);
         apiRoutes.post("eventRequest", ":id", use: fetchEventRequest);
+        apiRoutes.post("eventRequest", ":id", "delete", use: removeEventRequest)
 
         apiRoutes.post("locations", use: fetchLocations);
         apiRoutes.post("location", ":id", use: fetchLocation);
         apiRoutes.post("location", ":id", "edit", use: editLocation);
         apiRoutes.post("locations", "new", use: newLocation);
 
-        apiRoutes.post("users", use: fetchUsers);
-        apiRoutes.post("users", "modify", use: modifyUsers);
-        apiRoutes.post("users", "estimateCount", use: estimateCount);
-        apiRoutes.post("user", ":id", "modifyPoints", use: modifyUser);
+        apiRoutes.post("rewards", use: fetchRewards);
+        apiRoutes.post("reward", ":id", use: fetchReward);
+        apiRoutes.post("reward", ":id", "edit", use: editReward);
+        apiRoutes.post("rewards", "new", use: newReward);
     }
 
     // Serves the react page
@@ -507,6 +518,90 @@ struct AdminController : RouteCollection {
         try await location.save(on: req.db);
 
         return Msg(success: true, msg: "Updated Locations!");
+    }
+
+    struct RewardQuery : Content {
+        var filterByName: String?;
+    }
+
+    struct RewardInfo : Content {
+        var id: Int;
+        var name: String;
+        var description: String;
+        var cost: Int;
+        var allowedGrades: Int;
+    }
+
+    func fetchRewards(_ req: Request) async throws -> [RewardInfo] {
+        let rewardQuery = try req.content.decode(RewardQuery.self);
+        
+        let rewards = try await Reward.query(on: req.db)
+          .all()
+          .map { rew in
+              RewardInfo.init(id: rew.id!, name: rew.name, description: rew.description, cost: rew.cost, allowedGrades: rew.allowedGrades);
+          };
+        
+        if (rewardQuery.filterByName == nil || rewardQuery.filterByName!.isEmpty) {
+            return rewards;
+        }
+        
+        return rewards.filter({
+                                    $0.name.lowercased().contains(rewardQuery.filterByName!.lowercased());
+                             });
+    }
+
+    func fetchReward(_ req: Request) async throws -> Reward {
+        guard let rewardID = req.parameters.get("id", as: Int.self) else {
+            throw Abort(.badRequest)
+        }
+ 
+        guard let reward = try await Reward.query(on: req.db)
+          .filter(\.$id == rewardID)
+          .first() else {
+            throw Abort(.badRequest, reason: "Could not find reward.")
+        }
+
+        return reward;
+    }
+
+    struct ManageRewardInfo : Content {
+        var name: String;
+        var description: String;
+        var cost: Int;
+        var allowedGrades: Int;
+    }
+    
+    func newReward(_ req: Request) async throws -> Msg {
+        let args = try req.content.decode(ManageRewardInfo.self);
+
+        let reward = Reward(name: args.name, description: args.description, cost: args.cost, allowedGrades: args.allowedGrades);
+        
+        try await reward.save(on: req.db);
+
+        return Msg(success: true, msg: "Created Reward!");
+    }
+
+    func editReward(_ req: Request) async throws -> Msg {
+        guard let rewardID = req.parameters.get("id", as: Int.self) else {
+            throw Abort(.badRequest)
+        }
+
+        let args = try req.content.decode(ManageRewardInfo.self);
+ 
+        guard let reward = try await Reward.query(on: req.db)
+          .filter(\.$id == rewardID)
+          .first() else {
+            throw Abort(.badRequest, reason: "Could not find reward.")
+        }
+
+        reward.name = args.name;
+        reward.description = args.description;
+        reward.cost = args.cost;
+        reward.allowedGrades = args.allowedGrades;
+        
+        try await reward.save(on: req.db);
+
+        return Msg(success: true, msg: "Updated Reward!");
     }
     
 }

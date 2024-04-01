@@ -389,7 +389,7 @@ struct StudentController : RouteCollection {
     struct ClubInfo : Content {
         var id: Int;
         var name: String;
-        var descritpion: String;
+        var description: String;
         // todo: revisit        var categories: [String];
     }
 
@@ -397,7 +397,7 @@ struct StudentController : RouteCollection {
         let clubs = try await Club.query(on: req.db)
           .all()
           .map { club in
-              ClubInfo.init(id: club.id!, name: club.name, descritpion: club.description)
+              ClubInfo.init(id: club.id!, name: club.name, description: club.description)
           };
 
         return clubs;

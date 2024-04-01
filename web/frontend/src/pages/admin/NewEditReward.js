@@ -11,9 +11,7 @@ import { Autocomplete, Button, MenuItem, Select, TextField } from "@mui/material
 function NewEditRewardPage(props) {
   const [title, setTitle] = React.useState("New Reward");
 
-  const [rewardInfo, setRewardInfo] = React.useState({
-    // name: "B.E.S.T. Robotics State Competition", description: "Come visit for the B.E.S.T. Robotics Competition!", eventType: "Robotics", locationName: "Allen Stadium", locationID: 0, startDate: "9/1/2021", pointsWorth: 3, checkinType: "manual"
-  });
+  const [rewardInfo, setRewardInfo] = React.useState({});
 
   const [requests, setRequests] = React.useState(0);
 
@@ -49,6 +47,13 @@ function NewEditRewardPage(props) {
       gradesAllowed: -1
     });
   }, []);
+
+    const grades = {
+	"Fresh": 0b0001,
+	"Soph": 0b0010,
+	"Jun": 0b0100,
+	"Sen": 0b1000
+    }
 
   const saveButtonClicked = async () => {
     var isNew = true;
@@ -189,6 +194,31 @@ function NewEditRewardPage(props) {
               />
             </div>
 
+	      <label className="block text-gray-700 text-sm font-bold mb-2 mt-4" htmlFor="allowedGrades">
+		  Allowed Grades
+	      </label>
+	      <Select
+              className="border bg-gray-100 rounded-xl w-full"
+              name="allowedGrades"
+//		  value={}
+		  onChange={(e) => {
+		      const bitVal = e.currentTarget.value.reduce((a, c) => parseInt(a) + parseInt(c));
+                setRewardInfo({
+                  ...rewardInfo,
+                  allowedGrades: bitVal
+                })
+		  }}
+		  multiple
+              >
+		  {
+		      Object.keys(grades).map((grade) => {
+			  <MenuItem value={grades[grade]}>
+			      {grade}
+			  </MenuItem>
+		      })
+		  }
+            </Select>
+
             <label className="block text-gray-700 text-sm font-bold mb-2 mt-4" htmlFor="points">
               Point Cost
             </label>
@@ -197,8 +227,8 @@ function NewEditRewardPage(props) {
               placeholder="Point Cost"
               type="number"
               name="points"
-              value={rewardInfo.pointsWorth === -1 ? "" : rewardInfo.pointsWorth}
-              onChange={(e) => {
+              value={rewardInfo.cost === -1 ? "" : rewardInfo.cost}
+		onChange={(e) => {
                 setRewardInfo({
                   ...rewardInfo,
                   cost: parseInt(e.currentTarget.value)
