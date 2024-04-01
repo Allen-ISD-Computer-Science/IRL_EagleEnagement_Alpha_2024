@@ -24,13 +24,14 @@ class ClubActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_club_page)
 
-
+        // get club id and jwt from the intent
         val clubId = intent.getStringExtra("clubId")
         val jwt = intent.getStringExtra("jwt")
         updateClubInfo(jwt!!, clubId!!)
 
     }
 
+    // update information on activity to show correct club info
     private fun updateClubInfo(jwt: String, clubId: String) {
         var url = resources.getString(R.string.api_link)
         val retrofit = Retrofit.Builder()

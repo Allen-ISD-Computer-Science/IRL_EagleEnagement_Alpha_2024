@@ -14,7 +14,7 @@ class ClubViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         name.text = info.name
 
         var description : TextView = itemView.findViewById(R.id.txtClubListDescription)
-        description.text = info.descritpion
+        description.text = info.description
     }
 
 }

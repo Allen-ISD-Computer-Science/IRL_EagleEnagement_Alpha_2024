@@ -20,6 +20,7 @@ class VerifyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_verify)
 
+        // functionality for create account button
         val createButton = findViewById<Button>(R.id.buttonCreateAcct)
         createButton.setOnClickListener {
             val email = findViewById<EditText>(R.id.inputVerifyEmail).text.toString()
@@ -36,6 +37,7 @@ class VerifyActivity : AppCompatActivity() {
         }
     }
 
+    // post verification data to api
     private fun postDataUsingRetrofit(email: String, token: String, password: String, confirmPassword: String) {
         var url = resources.getString(R.string.api_link)
         val retrofit = Retrofit.Builder()

@@ -1,21 +1,21 @@
 //
-//  MissingPointsView.swift
+//  EditProfileView.swift
 //  ConnectEDU
 //
-//  Created by Logan Rohlfs on 2024-03-06.
+//  Created by Logan Rohlfs on 2024-03-27.
 //
 
 import SwiftUI
 
-struct MissingPointsView: View {
+struct EditProfileView: View {
     @ObservedObject var navigationManager = NavigationManager.shared
     
     var body: some View {
         VStack {
-            Text("WIP Page: Missing Points")
+            Text("WIP Page: Edit Profile")
                 .font(.title2)
                 .bold()
-
+            
             Button {
                 navigationManager.back()
             } label: {
@@ -30,6 +30,6 @@ struct MissingPointsView: View {
     }
 }
 
- #Preview {
-    MissingPointsView()
- }
+#Preview {
+    EditProfileView()
+}

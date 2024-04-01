@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var navigationManager: NavigationManager
+//    @ObservedObject var navigationManager = NavigationManager.shared
+    @ObservedObject var navigationManager = NavigationManager.shared
 
     var body: some View {
         Group {
-            switch self.navigationManager.currentPage {
+            switch navigationManager.currentPage {
             case .login:
                 LoginView(viewModel: LoginViewModel(navigationManager: navigationManager))
             case .forgotPassword:
@@ -37,11 +38,18 @@ struct ContentView: View {
                 EventView(event_id: navigationManager.currentEventID ?? 0)
             case .clubDetail:
                 ClubView(club_id: navigationManager.currentClubID ?? 0)
+            case .editProfile:
+                EditProfileView()
+            case .pointsHistory:
+                PointsHistoryView()
+            default:
+                Text("Page does not exist")
                 // Add other cases as needed
             }
         }
         .onTapGesture(count: 3) {
             navigationManager.currentPage == .dev ? navigationManager.back() : navigationManager.navigate(to: .dev)
+            
         }
     }
 }

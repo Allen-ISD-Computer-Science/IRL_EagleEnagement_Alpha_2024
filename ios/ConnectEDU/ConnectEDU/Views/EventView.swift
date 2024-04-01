@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventView: View {
-    @EnvironmentObject var navigationManager: NavigationManager
+    @ObservedObject var navigationManager = NavigationManager.shared
     
     var event_id: Int
     @StateObject var viewModel: EventViewModel
@@ -32,7 +32,7 @@ struct EventView: View {
                                         .scaledToFill()
                                         .blur(radius: 1.5)
                                         .brightness(-0.1)
-                                        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                                        
                                     
                                     VStack {
                                         
@@ -180,13 +180,16 @@ struct EventView: View {
                     }
                     // Add more views to display other event properties
                 } else {
-                    Text("Loading...")
+                    Loading()
+                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                 }
             }
             .onAppear {
                 viewModel.getEvent()
             }
         }
+        // TODO: Fix placement so it doesnt go off screen so that stuff can be sized properly
+//        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }
 }
 

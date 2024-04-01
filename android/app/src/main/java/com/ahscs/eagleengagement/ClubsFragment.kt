@@ -45,6 +45,7 @@ class ClubsFragment(jwt: String) : Fragment() {
         return view
     }
 
+    // retrieve list of clubs from API and update the adapter
     private fun getClubs(jwt: String, adapter: ClubAdapter) : MutableList<DataModel.ClubResponse> {
         var clubList = mutableListOf <DataModel.ClubResponse>()
 
@@ -83,10 +84,13 @@ class ClubsFragment(jwt: String) : Fragment() {
         return clubList
     }
 
+    // set functionality for buttons
     private fun configureBtns(view: View) {
         val profileBtn = view.findViewById<ImageView>(R.id.clubProfileBtn)
         profileBtn.setOnClickListener {
-            activity?.startActivity(Intent(activity, ProfileActivity::class.java))
+            val intent = Intent(activity, ProfileActivity::class.java)
+            intent.putExtra("jwt", jwt)
+            activity?.startActivity(intent)
         }
     }
 

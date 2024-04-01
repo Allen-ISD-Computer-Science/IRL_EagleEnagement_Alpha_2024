@@ -10,6 +10,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface RetrofitAPI {
+    // contains the api routes and uses data models
     @POST("login")
     fun postLogin(@Body dataModel: LoginDataModel?) : Call<DataModel.Response>
 

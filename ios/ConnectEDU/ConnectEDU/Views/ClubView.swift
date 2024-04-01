@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ClubView: View {
-    @EnvironmentObject var navigationManager: NavigationManager
+    @ObservedObject var navigationManager = NavigationManager.shared
     
     var club_id: Int
     @StateObject var viewModel: ClubViewModel
@@ -212,7 +212,8 @@ struct ClubView: View {
                     }
                     // Add more views to display other event properties
                 } else {
-                    Text("Loading...")
+                    Loading()
+                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                 }
             }
             .onAppear {

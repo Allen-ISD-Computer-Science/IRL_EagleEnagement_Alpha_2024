@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct VerifyView: View {
-    @EnvironmentObject var navigationManager: NavigationManager
+    @ObservedObject var navigationManager = NavigationManager.shared
     @StateObject var viewModel: VerifyViewModel
     
     var body: some View {
