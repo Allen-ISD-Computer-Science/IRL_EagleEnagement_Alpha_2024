@@ -1,12 +1,10 @@
 import * as React from "react";
-import dayjs from "dayjs";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faIdCard, faPlus, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faPlus, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import AdminNav from "../../components/AdminNav";
 import LoadingOverlay from "../../components/LoadingOverlay";
-import { Checkbox, FormControlLabel } from "@mui/material";
 
 function RewardsPage(props) {
   const searchRef  = React.useRef(null);
@@ -27,7 +25,7 @@ function RewardsPage(props) {
     const gradeBitToString = (bits) => {
 	var res = [];
 	Object.keys(grades).forEach(grade => {
-	    if ((bits & grades[grade]) != 0) {
+	    if ((bits & grades[grade]) !== 0) {
 		res.push(grade);
 	    }
 	})

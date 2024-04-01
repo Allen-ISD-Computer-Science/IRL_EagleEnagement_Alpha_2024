@@ -9,17 +9,23 @@ import AdminNav from "../../components/AdminNav";
 import LoadingOverlay from "../../components/LoadingOverlay";
 
 import DeleteModal from "../../components/DeleteModal";
+import ApproveEventRequestModal from "../../components/ApproveEventRequestModal";
 
 function EventRequestsPage(props) {
   const [requests, setRequests] = React.useState(0);
 
   const [eventRequests, setEventRequests] = React.useState([
-    { id: 0, name: "hi" }
+    { id: 0, name: "hi", description: "cool event" }
   ]);
 
   const [selectedRequest, setSelectedRequest] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(null);
   const [updateCount, setUpdateCount] = React.useState(0);
+
+  const approveRequestModal = (id) => {
+    setSelectedRequest(eventRequests.find(a => a.id === id));
+    setOpenModal("approve");
+  }
 
   const deleteRequestModal = (id) => {
     setSelectedRequest(eventRequests.find(a => a.id === id));
@@ -98,6 +104,12 @@ function EventRequestsPage(props) {
             }
           }}
         />
+        <ApproveEventRequestModal
+          open={openModal === "approve"}
+          setOpen={(val) => setOpenModal(val ? "approve" : null)}
+          name={selectedRequest ? `Event Request: '${selectedRequest.name}'` : "?"}
+          selectedRequest={selectedRequest}
+        />
 
         <div className="flex flex-col justify-center text-white text-5xl font-bold bg-blue-950 w-full pl-12 pr-12 items-start max-md:text-4xl max-md:px-5 h-[150px] max-md:max-h-[100px]">
           <span className="my-auto">
@@ -142,7 +154,7 @@ function EventRequestsPage(props) {
                     <td>{eventReq.startDate}</td>
                     <td>{eventReq.userRequested}</td>
                     <td className="[&_button]:mx-4">
-                      <button className="bg-blue-950 text-white px-4 py-2 rounded-xl"><FontAwesomeIcon icon={faAdd} size="lg" /></button>
+                      <button onClick={() => approveRequestModal(eventReq.id)} className="bg-blue-950 text-white px-4 py-2 rounded-xl"><FontAwesomeIcon icon={faAdd} size="lg" /></button>
                       <button onClick={() => deleteRequestModal(eventReq.id)} className="bg-blue-950 text-white px-4 py-2 rounded-xl"><FontAwesomeIcon icon={faTrash} size="lg" /></button>
                     </td>
                   </tr>

@@ -5,12 +5,14 @@ import { DateTimePicker, TimePicker } from "@mui/x-date-pickers";
 import { ToastContainer, toast } from 'react-toastify';
 
 import TeacherNav from "../../components/TeacherNav";
-import { Button, MenuItem, Select, TextField, Autocomplete } from "@mui/material";
+import { Button, TextField, Autocomplete } from "@mui/material";
 
 function EventRequestPage(props) {
   const [requestInfo, setRequestInfo] = React.useState({});
   const [isDisabled, setDisabled] = React.useState(false);
-  const [eventTypes, setEventTypes] = React.useState([]);
+  
+  // const [eventTypes, setEventTypes] = React.useState([]);
+  const eventTypes = [];
 
   const submitRequest = async () => {
     const urlPath = `${process.env.PUBLIC_URL}/faculty/api/requestEvent`
