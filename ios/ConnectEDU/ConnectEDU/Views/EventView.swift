@@ -180,7 +180,8 @@ struct EventView: View {
                     }
                     // Add more views to display other event properties
                 } else {
-                    Text("Loading...")
+                    Loading()
+                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                 }
             }
             .onAppear {

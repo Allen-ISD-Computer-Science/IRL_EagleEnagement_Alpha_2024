@@ -49,6 +49,7 @@ struct ContentView: View {
         }
         .onTapGesture(count: 3) {
             navigationManager.currentPage == .dev ? navigationManager.back() : navigationManager.navigate(to: .dev)
+            
         }
     }
 }

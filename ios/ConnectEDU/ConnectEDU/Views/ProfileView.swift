@@ -15,6 +15,7 @@ struct ProfileView: View {
         GeometryReader { geometry in
             ZStack {
                 VStack {
+                    
                     Spacer()
                     
                     // Profile
@@ -145,11 +146,13 @@ struct ProfileView: View {
                     .padding()
                 }
                 .padding()
-                .border(.red)
+                .padding(.top, 75)
                 .offset(y: -1 * geometry.size.height * 0.035)
-                .frame(width: geometry.size.width, height: geometry.size.height * 0.825)
+                .frame(width: geometry.size.width, height: geometry.size.height * 0.85)
                 
                 VStack {
+                    UpperNav(size: CGSize(width: geometry.size.width, height: geometry.size.height * 0.125), userProfile: viewModel.userProfile)
+                        .padding(.top, 20)
                     
                     Spacer()
                     
