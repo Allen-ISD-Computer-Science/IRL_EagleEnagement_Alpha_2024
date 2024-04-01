@@ -133,13 +133,7 @@ function NewEditEventPage(props) {
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
       if ((filteredInfo[key] === "" || filteredInfo[key] === null || filteredInfo[key] === -1) && (key !== "customImagePath")) {
-        toast.error(`${key} cannot be empty!`, {
-          position: "top-right",
-          autoClose: 2000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          theme: "light"
-        });
+        toast.error(`${key} cannot be empty!`);
         return;
       }
     }
