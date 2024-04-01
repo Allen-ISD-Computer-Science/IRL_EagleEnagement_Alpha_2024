@@ -7,33 +7,33 @@ import AdminNav from "../../components/AdminNav";
 import LoadingOverlay from "../../components/LoadingOverlay";
 
 function RewardsPage(props) {
-  const searchRef  = React.useRef(null);
+  const searchRef = React.useRef(null);
 
   const [requests, setRequests] = React.useState(0);
 
   const [filter, setFilter] = React.useState("");
 
-    const [rewards, setRewards] = React.useState(null);
+  const [rewards, setRewards] = React.useState(null);
 
-    const grades = {
-	"Fresh": 0b0001,
-	"Soph": 0b0010,
-	"Jun": 0b0100,
-	"Sen": 0b1000
-    }
-    
-    const gradeBitToString = (bits) => {
-	var res = [];
-	Object.keys(grades).forEach(grade => {
-	    if ((bits & grades[grade]) !== 0) {
-		res.push(grade);
-	    }
-	})
+  const grades = {
+    "Fresh": 0b0001,
+    "Soph": 0b0010,
+    "Jun": 0b0100,
+    "Sen": 0b1000
+  }
 
-	return res.length > 0 ?
-	    (res.length === 4 ? "Any" :
-	     res.join(", ")) : "None";
-    }
+  const gradeBitToString = (bits) => {
+    var res = [];
+    Object.keys(grades).forEach(grade => {
+      if ((bits & grades[grade]) !== 0) {
+        res.push(grade);
+      }
+    })
+
+    return res.length > 0 ?
+      (res.length === 4 ? "Any" :
+        res.join(", ")) : "None";
+  }
 
   React.useEffect(() => {
     const getRewards = async () => {
@@ -42,10 +42,12 @@ function RewardsPage(props) {
       const args = {};
       if (filter !== "") args.filterByName = filter;
 
-	const res = await fetch(`${process.env.PUBLIC_URL}/admin/api/rewards`, { headers: {
-	    Accept: "application/json",
-	    "Content-Type": "application/json"
-	}, method: "POST", body: JSON.stringify(args) });
+      const res = await fetch(`${process.env.PUBLIC_URL}/admin/api/rewards`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }, method: "POST", body: JSON.stringify(args)
+      });
 
       return await res.json();
     }
@@ -127,7 +129,7 @@ function RewardsPage(props) {
                   <tr key={reward.id} className="text-l">
                     <td>{reward.name}</td>
                     <td>{reward.cost}</td>
-                      <td>{gradeBitToString(reward.allowedGrades)}</td>
+                    <td>{gradeBitToString(reward.allowedGrades)}</td>
                     <td className="[&>*]:mx-4">
                       <a className="bg-blue-950 text-white px-4 py-2 rounded-xl" href={process.env.PUBLIC_URL + `/admin/rewards/edit/${reward.id}`}>
                         <FontAwesomeIcon icon={faEdit} size="lg" />

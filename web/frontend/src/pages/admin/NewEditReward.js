@@ -10,8 +10,16 @@ function NewEditRewardPage(props) {
   const [title, setTitle] = React.useState("New Reward");
 
   const [rewardInfo, setRewardInfo] = React.useState({});
+  const [allowedGrades, setAllowedGrades] = React.useState([]);
 
   const [requests, setRequests] = React.useState(0);
+
+  const grades = {
+    "Fresh": 0b0001,
+    "Soph": 0b0010,
+    "Jun": 0b0100,
+    "Sen": 0b1000
+  }
 
   React.useEffect(() => {
     const rewardID = parseInt(window.location.pathname.split("/").pop());
@@ -27,7 +35,24 @@ function NewEditRewardPage(props) {
       getReward().then((reward) => {
         document.title = "Edit Reward - " + reward.name;
         setTitle("Edit Reward - " + reward.name);
+
+        const gradesObj = {
+          "Fresh": 0b0001,
+          "Soph": 0b0010,
+          "Jun": 0b0100,
+          "Sen": 0b1000
+        }
+
         setRewardInfo(reward);
+        const gradeBits = reward.allowedGrades;
+        const selectedGrades = [];
+        Object.keys(gradesObj).forEach(grade => {
+          if ((gradeBits & gradesObj[grade]) !== 0) {
+            selectedGrades.push(grade);
+          }
+        });
+        setAllowedGrades(selectedGrades);
+
         setRequests((prev) => prev - 1);
       }).catch((err) => {
         setRequests((prev) => prev - 1);
@@ -45,13 +70,6 @@ function NewEditRewardPage(props) {
       gradesAllowed: -1
     });
   }, []);
-
-  const grades = {
-    "Fresh": 0b0001,
-    "Soph": 0b0010,
-    "Jun": 0b0100,
-    "Sen": 0b1000
-  }
 
   const saveButtonClicked = async () => {
     var isNew = true;
@@ -198,13 +216,14 @@ function NewEditRewardPage(props) {
             <Select
               className="border bg-gray-100 rounded-xl w-full"
               name="allowedGrades"
-              //		  value={}
+              value={allowedGrades}
               onChange={(e) => {
-                const bitVal = e.currentTarget.value.reduce((a, c) => parseInt(a) + parseInt(c));
+                setAllowedGrades(e.target.value);
+                const bitVal = e.target.value.reduce((a, c) => parseInt(a) + parseInt(c));
                 setRewardInfo({
                   ...rewardInfo,
                   allowedGrades: bitVal
-                })
+                });
               }}
               multiple
             >
