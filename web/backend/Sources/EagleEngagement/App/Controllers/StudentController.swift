@@ -81,8 +81,8 @@ struct StudentController : RouteCollection {
         let userToken = try req.jwt.verify(as: UserToken.self);
         
         guard let studentUser = try await StudentUser.query(on: req.db)
-                .with(\.$user)
-                .filter(\.$user.$id == userToken.userId)
+                .join(User.self, on: \StudentUser.$user.$id == \User.$id)
+                .filter(User.self, \.$id == userToken.userId)
                 .first()
         else {
             throw Abort(.unauthorized);
@@ -110,9 +110,10 @@ struct StudentController : RouteCollection {
             throw Abort(.badRequest, reason: "Email invalid.");
         }
 
-        guard let studentUser = try await StudentUser.query(on: req.db).with(\.$user)
+        guard let studentUser = try await StudentUser.query(on: req.db)
+                .join(User.self, on: \StudentUser.$user.$id == \User.$id)
                 .filter(\.$studentID == args.studentID)
-                .filter(\.$user.$email == args.email)
+                .filter(User.self, \.$email == args.email)
                 .first() else {
             throw Abort(.badRequest, reason: "Account not found or invalid.");
         }
