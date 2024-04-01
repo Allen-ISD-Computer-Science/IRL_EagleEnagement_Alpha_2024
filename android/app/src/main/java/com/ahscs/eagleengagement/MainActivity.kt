@@ -1,15 +1,20 @@
 package com.ahscs.eagleengagement
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract.Data
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.ahscs.eagleengagement.datamodels.AuthDataModel
 import com.ahscs.eagleengagement.datamodels.DataModel
@@ -26,6 +31,14 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var bottomNav : BottomNavigationView
     private val LOCATION_PERMISSION_REQ_CODE = 1000;
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { isGranted: Boolean ->
+        if (!isGranted) {
+            Toast.makeText(applicationContext, "You will not receive notifications.", Toast.LENGTH_SHORT)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +71,8 @@ class MainActivity : AppCompatActivity() {
             throw Exception("JWT is null!")
         }
 
+        askNotificationPermission()
+
         val eventsList = EventsFragment(jwt!!)
         val clubsList = ClubsFragment(jwt!!)
         val rewardsList = RewardsFragment()
@@ -74,16 +89,10 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-//        if (ActivityCompat.checkSelfPermission(this,
-//                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // request permission
-//            ActivityCompat.requestPermissions(this,
-//                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQ_CODE);
-//            return
-//        }
 
     }
 
+    // update point counter at top of the page
     private fun setPoints(jwt: String) {
         var url = resources.getString(R.string.api_link)
         val retrofit = Retrofit.Builder()
@@ -128,23 +137,28 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        when (requestCode) {
-//            LOCATION_PERMISSION_REQ_CODE -> {
-//                if (grantResults.isNotEmpty() &&
-//                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    println("Permission granted")
-//                    // permission granted
-//                } else {
-//                    // permission denied
-//                    println("Permission denied")
-//                    Toast.makeText(this, "You need to grant permission to access location",
-//                        Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
-//    }
+    private fun askNotificationPermission() {
+        //for API level >= 33
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                // has permission
+            } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                val builder = AlertDialog.Builder(this@MainActivity, com.google.android.material.R.style.Theme_AppCompat_Dialog_Alert)
+                builder.setCancelable(true)
+                builder.setTitle("Are you sure?")
+                builder.setMessage("Allowing notifications will send you reminders to check in to events and club meetings!")
+                builder.setNegativeButton("No! I don't want that.") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                builder.setNeutralButton("Nevermind! Allow notifications.") { dialog, _ ->
+                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+                builder.show()
+            } else {
+                // ask for permission
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+    }
+
 }

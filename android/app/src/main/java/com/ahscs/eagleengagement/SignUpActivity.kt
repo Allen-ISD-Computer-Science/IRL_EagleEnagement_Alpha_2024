@@ -19,6 +19,7 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_creation)
 
+        // functionality for sign up button
         val signUpButton = findViewById<Button>(R.id.buttonSignup)
         signUpButton.setOnClickListener {
             val firstName = findViewById<EditText>(R.id.inputFirstName).text.toString()
@@ -29,6 +30,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    // sign up data from inputs to api and redirect to verification
     private fun postDataUsingRetrofit(firstName: String, lastName: String, studentID: String, email: String) {
         var url = resources.getString(R.string.api_link)
         val retrofit = Retrofit.Builder()

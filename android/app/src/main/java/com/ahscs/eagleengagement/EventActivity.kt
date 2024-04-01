@@ -43,6 +43,7 @@ class EventActivity : AppCompatActivity() {
         jwt = intent.getStringExtra("jwt")
         updateEventInfo(jwt!!, eventId!!)
 
+        // request permission for location
         val locationPermissionRequest = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissions ->
@@ -64,6 +65,7 @@ class EventActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
+    // get event info from API and update in the activity
     private fun updateEventInfo(jwt: String, eventId: String) {
         var url = resources.getString(R.string.api_link)
         val retrofit = Retrofit.Builder()
@@ -130,6 +132,7 @@ class EventActivity : AppCompatActivity() {
         })
     }
 
+    // send location to API for check in
     private fun checkIn(jwt: String, eventId: String, latitude: Double, longitude: Double, accuracy: Double) {
         var url = resources.getString(R.string.api_link)
         val retrofit = Retrofit.Builder()
@@ -173,6 +176,7 @@ class EventActivity : AppCompatActivity() {
         })
     }
 
+    // set functionality for buttons
     private fun configureBtns() {
         val backBtn = findViewById<ImageView>(R.id.eventBackBtn)
         backBtn.setOnClickListener {

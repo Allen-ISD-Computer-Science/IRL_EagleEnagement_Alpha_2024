@@ -27,6 +27,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         }
     }
 
+    // send user provided data to api and redirect to verification page
     private fun postDataUsingRetrofit(email: String, studentID: String) {
         var url = resources.getString(R.string.api_link)
         val retrofit = Retrofit.Builder()

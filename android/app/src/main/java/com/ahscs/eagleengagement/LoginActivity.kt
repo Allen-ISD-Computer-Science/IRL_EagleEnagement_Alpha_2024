@@ -23,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
         configureBtns()
     }
 
+    // set functions for all buttons on activity
     private fun configureBtns() {
         val forgotPasswordBtn = findViewById<TextView>(R.id.txtPasswordRecove)
         forgotPasswordBtn.setOnClickListener {
@@ -43,6 +44,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    // uses API to post login
     private fun postDataUsingRetrofit(email: String, password: String) {
         var url = resources.getString(R.string.api_link)
         val retrofit = Retrofit.Builder()

@@ -32,6 +32,7 @@ class EventsFragment(jwt: String) : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home_page, container, false)
         configureBtns(view)
 
+        // set recycler view and adapter
         val adapter = EventAdapter(this)
         getEvents(jwt, adapter)
         val recycler : RecyclerView = view.findViewById(R.id.eventRecycler)
@@ -49,6 +50,7 @@ class EventsFragment(jwt: String) : Fragment() {
         return view
     }
 
+    // retrieve list of events from api and update recycler adapter
     private fun getEvents(jwt: String, adapter: EventAdapter) : MutableList<DataModel.EventResponse> {
         var eventList = mutableListOf <DataModel.EventResponse>()
 
@@ -87,6 +89,7 @@ class EventsFragment(jwt: String) : Fragment() {
         return eventList
     }
 
+    // set functionality for buttons
     private fun configureBtns(view: View) {
         val profileBtn = view.findViewById<ImageView>(R.id.eventProfileBtn)
         profileBtn.setOnClickListener {

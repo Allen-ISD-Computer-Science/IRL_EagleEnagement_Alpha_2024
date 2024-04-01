@@ -3,6 +3,7 @@ package com.ahscs.eagleengagement.datamodels
 import java.util.Date
 
 sealed class DataModel {
+    // data models for getting and posting non authentication
     data class ProfileResponse(
         var name: String,
         var studentID: Int,
@@ -55,7 +56,7 @@ sealed class DataModel {
     data class ClubResponse(
         var id: Int,
         var name: String,
-        var descritpion: String
+        var description: String
     ) : DataModel()
 
     data class ClubContentResponse(

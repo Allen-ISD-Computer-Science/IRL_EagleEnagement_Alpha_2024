@@ -1,6 +1,7 @@
 package com.ahscs.eagleengagement.datamodels
 
 sealed class AuthDataModel {
+    // data models specifically for authentication
     data class LoginDataModel(
         var email: String,
         var password: String

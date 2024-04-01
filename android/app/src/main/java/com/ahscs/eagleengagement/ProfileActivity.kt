@@ -60,6 +60,7 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
 
+        // set adapters for drop down menus
         val houseSpinner : Spinner = findViewById(R.id.houseSpinner)
         val houseAdapter = ArrayAdapter.createFromResource(this, R.array.houses, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
         houseSpinner.adapter = houseAdapter
@@ -208,6 +209,7 @@ class ProfileActivity : AppCompatActivity() {
         })
     }
 
+    // set functionality for buttons
     private fun configureBtns() {
         val backBtn = findViewById<ImageView>(R.id.profileBackBtn)
         backBtn.setOnClickListener {
