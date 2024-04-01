@@ -13,8 +13,8 @@ function HomePage(props) {
         <nav className="justify-between items-stretch flex w-full gap-5 sticky top-0 max-md:w-full max-md:flex-wrap">
           <span className="flex flex-col items-stretch">
             <img
-              srcSet={process.env.PUBLIC_URL + "/assets/images/logo.png"}
-              alt="Eagle Engagement Logo"
+              srcSet={process.env.PUBLIC_URL + "/assets/images/logo.svg"}
+              alt="ConnectEdu Logo"
             />
           </span>
           <div className="drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] justify-center w-[66%] py-8 self-start max-md:w-full max-md:pr-5">
@@ -52,11 +52,11 @@ function HomePage(props) {
           <span className="text-3xl text-white max-md:!pb-10">|</span>
           <br />
           <span>
-            Eagle Engagement
+            CONNECTEDU
           </span>
           <br />
           <span className="text-4xl max-md:text-2xl text-white max-md:!leading-10">
-            AllenISD's Student Engagement App
+            A Student Engagement App
           </span>
         </div>
       </section>
@@ -68,9 +68,11 @@ function HomePage(props) {
         >About</h2>
         <div className="mt-10 py-10 px-20 text-xl max-md:max-w-full max-md:my-10">
           <span>
-            Allen High School's Eagle Engagement is a cutting-edge student engagement app designed to streamline the process of discovering and participating in various events and organizations.
+            ConnectEdu is a cutting-edge student engagement app designed to streamline the process of discovering and participating in various events and organizations.
             The app provides a simple and intuitive interface for students to find and join clubs, sports, and other extracurricular activities.
             Students can check into events and meetings to earn points which can be redeemed for rewards such as priority arena scheduling!
+            Our system was also designed with faculty members in mind.
+            Faculty members can easily manage clubs, and administrators can setup events in seconds!
           </span>
         </div>
       </section>
@@ -78,7 +80,7 @@ function HomePage(props) {
       <section className="flex flex-col items-center justify-center">
         <h2
           className="text-blue-950 text-center text-5xl font-extrabold uppercase max-md:text-4xl"
-        >Examples
+        >Student Example
         </h2>
         <div className="flex flex-row gap-10 mt-10 max-md:!flex-col items-center justify-center">
           <img
@@ -100,6 +102,18 @@ function HomePage(props) {
             className="max-w-[300px] max-md:max-w-full"
           />
         </div>
+        {/* <h2
+          className="text-blue-950 text-center text-5xl font-extrabold uppercase max-md:text-4xl"
+        >Faculty Example
+        </h2>
+        <div className="flex flex-col gap-10 mt-10 max-md:!flex-col items-center justify-center">
+          <img
+            loading="lazy"
+            srcSet={process.env.PUBLIC_URL + "/assets/images/users-example.png"}
+            alt="Users Page Website"
+            className="max-w-[300px] max-md:max-w-full"
+          />
+        </div> */}
       </section>
     </div>
 
