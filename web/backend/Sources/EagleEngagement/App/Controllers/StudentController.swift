@@ -40,6 +40,8 @@ struct StudentController : RouteCollection {
 
         protectedRoutes.post("rewards", use: fetchRewards);
         protectedRoutes.post("reward", ":id", "purchase", use: purchaseReward);
+
+        protectedRoutes.post("pointHistory", use: fetchPointHistory);
     }
 
     func login(_ req: Request) async throws -> Msg {
@@ -513,5 +515,33 @@ struct StudentController : RouteCollection {
         try await pointHistory.save(on: req.db);
 
         return Msg(success: true, msg: "Purchased \(reward.name)");
+    }
+
+    struct PointHistoryInfo : Content {
+        var reason: String;
+        var points: Int;
+        var date: Date;
+    }
+
+    func fetchPointHistory(_ req: Request) async throws -> [PointHistoryInfo] {
+        let userToken = try req.jwt.verify(as: UserToken.self);
+
+        guard let studentUser = try await StudentUser.query(on: req.db)
+                .with(\.$user)
+                .filter(\.$user.$id == userToken.userId)
+                .first()
+        else {
+            throw Abort(.unauthorized);
+        }
+
+        let pointHistory = try await PointHistory.query(on: req.db)
+          .filter(\.$user.$id == studentUser.user.id!)
+          .sort(\.$madeAt, .descending)
+          .all()
+          .map { h in
+            PointHistoryInfo.init(reason: h.reason, points: h.points, date: h.madeAt!)
+          };
+
+        return pointHistory;
     }
 }
