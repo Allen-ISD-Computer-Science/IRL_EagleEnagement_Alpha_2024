@@ -47,10 +47,11 @@ function NewEditRewardPage(props) {
         const gradeBits = reward.allowedGrades;
         const selectedGrades = [];
         Object.keys(gradesObj).forEach(grade => {
-          if ((gradeBits & gradesObj[grade]) !== 0) {
-            selectedGrades.push(grade);
+            if ((gradeBits & gradesObj[grade]) !== 0) {
+		selectedGrades.push(`${gradesObj[grade]}`);
           }
         });
+	  console.log("Selected Grades: " + selectedGrades);
         setAllowedGrades(selectedGrades);
 
         setRequests((prev) => prev - 1);
@@ -67,7 +68,7 @@ function NewEditRewardPage(props) {
       name: "",
       description: "",
       cost: -1,
-      gradesAllowed: -1
+      allowedGrades: -1
     });
   }, []);
 
@@ -219,7 +220,8 @@ function NewEditRewardPage(props) {
               value={allowedGrades}
               onChange={(e) => {
                 setAllowedGrades(e.target.value);
-                const bitVal = e.target.value.reduce((a, c) => parseInt(a) + parseInt(c));
+                    const bitVal = e.target.value.reduce((a, c) => parseInt(a) + parseInt(c));
+		    console.log(e.target.value, bitVal);
                 setRewardInfo({
                   ...rewardInfo,
                   allowedGrades: bitVal
@@ -230,7 +232,7 @@ function NewEditRewardPage(props) {
               {
                 Object.keys(grades).map((grade) => {
                   return (
-                    <MenuItem value={grades[grade]}>
+                      <MenuItem value={`${grades[grade]}`}>
                       {grade}
                     </MenuItem>
                   )
@@ -278,7 +280,7 @@ function NewEditRewardPage(props) {
                 variant="contained"
                 color="error"
                 component="a"
-                href={process.env.PUBLIC_URL + "/admin/events"}
+                href={process.env.PUBLIC_URL + "/admin/rewards"}
               >
                 Cancel
               </Button>
