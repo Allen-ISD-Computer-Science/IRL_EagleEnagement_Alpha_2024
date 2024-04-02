@@ -36,6 +36,10 @@ func routes(_ app: Application) throws {
     sessionRoutes.get("signup") { req in                
         return try await serveIndex(req)
     }
+
+    sessionRoutes.get("verify") { req in
+        return try await serveIndex(req);
+    }
     
     sessionRoutes.post("login") { req -> Msg in
         guard let user = req.auth.get(User.self) else {
