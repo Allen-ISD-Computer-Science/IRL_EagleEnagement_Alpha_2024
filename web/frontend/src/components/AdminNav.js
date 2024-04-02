@@ -31,7 +31,7 @@ function AdminNav(props) {
           <img
             // loading="lazy"
             srcSet={process.env.PUBLIC_URL + "/assets/images/logo.svg"}
-            alt="ConnectEdu Logo"
+            alt="ConnectEDU Logo"
             style={{ width: "100%", height: "150px", aspectRatio: "2/1", padding: "0.5rem", background: "rgba(0,0,0,0.1)" }}
             className="shadow"
           />

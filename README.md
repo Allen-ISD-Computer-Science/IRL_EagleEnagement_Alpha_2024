@@ -1,4 +1,4 @@
-# ConnectEdu
+# ConnectEDU
 
 ## Vision Statement
 

@@ -71,7 +71,7 @@ function VerifyPage(props) {
       <span className="shadow-lg bg-blue-950 flex w-[650px] max-w-full flex-col mb-5 pl-12 pr-8 pb-2.5 rounded-2xl max-md:px-5 text-white">
         <img
           srcSet={process.env.PUBLIC_URL + "/assets/images/logo.svg"}
-          alt="ConnectEdu Logo"
+          alt="ConnectEDU Logo"
           className="h-40 mt-6"
         />
         <div className="justify-center items-center self-stretch flex flex-col mt-6 px-16 max-md:max-w-full max-md:mt-10 max-md:px-5">

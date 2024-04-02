@@ -14,7 +14,7 @@ function HomePage(props) {
           <span className="flex flex-col items-stretch">
             <img
               srcSet={process.env.PUBLIC_URL + "/assets/images/logo.svg"}
-              alt="ConnectEdu Logo"
+              alt="ConnectEDU Logo"
             />
           </span>
           <div className="drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] justify-center w-[66%] py-8 self-start max-md:w-full max-md:pr-5">
@@ -68,7 +68,7 @@ function HomePage(props) {
         >About</h2>
         <div className="mt-10 py-10 px-20 text-xl max-md:max-w-full max-md:my-10">
           <span>
-            ConnectEdu is a cutting-edge student engagement app designed to streamline the process of discovering and participating in various events and organizations.
+            ConnectEDU is a cutting-edge student engagement app designed to streamline the process of discovering and participating in various events and organizations.
             The app provides a simple and intuitive interface for students to find and join clubs, sports, and other extracurricular activities.
             Students can check into events and meetings to earn points which can be redeemed for rewards such as priority arena scheduling!
             Our system was also designed with faculty members in mind.
