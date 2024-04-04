@@ -32,5 +32,8 @@ enum Endpoints {
     // Rewards
     static let rewards = "\(baseAPIURL)/rewards/"
     
+    // Points History
+    static let pointHistory = "\(baseAPIURL)/pointHistory/"
+    
     // Other endpoints...
 }
