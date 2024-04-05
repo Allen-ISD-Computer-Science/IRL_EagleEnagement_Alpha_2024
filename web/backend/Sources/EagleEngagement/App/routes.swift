@@ -106,4 +106,5 @@ func routes(_ app: Application) throws {
     try app.register(collection: AdminController())
     try app.register(collection: TeacherController())
     try app.register(collection: StudentController())
+    try app.register(collection: PictureController())
 }
