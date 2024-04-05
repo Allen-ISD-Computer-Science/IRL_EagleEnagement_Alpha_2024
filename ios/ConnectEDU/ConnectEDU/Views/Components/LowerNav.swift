@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LowerNav: View {
-    @EnvironmentObject var navigationManager: NavigationManager
+    @ObservedObject var navigationManager = NavigationManager.shared
     
     var size: CGSize
     

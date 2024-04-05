@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UpperNav: View {
-    @EnvironmentObject var navigationManager: NavigationManager
+    @ObservedObject var navigationManager = NavigationManager.shared
     
     var userProfile: Profile?
     var size: CGSize
@@ -19,47 +19,51 @@ struct UpperNav: View {
     }
     
     var body: some View {
-        HStack {
-            Button {
-                navigationManager.navigate(to: .missingPoints)
-            } label: {
-                VStack {
-                    Image(systemName: "flag.fill")
-                        .font(.system(size: size.height / 3))
-                    
-                    Text("Request")
-                        .font(.subheadline)
+        ZStack {
+            HStack {
+                Button {
+                    navigationManager.navigate(to: .missingPoints)
+                } label: {
+                    VStack {
+                        Image(systemName: "flag.fill")
+                            .font(.system(size: size.height / 3))
+                        
+                        Text("Request")
+                            .font(.subheadline)
+                    }
+                    .foregroundColor(navigationManager.currentPage == .missingPoints ? .txtPrimary : .txtSecondary)
+                    //                .offset(y: -10)
+                    .padding(.leading, 40)
                 }
-                .foregroundColor(navigationManager.currentPage == .missingPoints ? .txtPrimary : .txtSecondary)
-//                .offset(y: -10)
-                .padding(.leading, 40)
-            }
-            
-            Spacer()
-            
-            // POINTS PLACEHOLDER INSERT API STUFF HERE
-            Text("\(userProfile?.points ?? 999)")
-                .font(.system(size: size.height / 4))
-                .bold()
-//                .offset(y: 20)
-            
-            Spacer()
-            
-            Button {
-                navigationManager.navigate(to: .profile)
-            } label: {
-                VStack {
-                    Image(systemName: "person.circle")
-                        .font(.system(size: size.height / 3))
-                    
-                    Text("Profile")
-                        .font(.subheadline)
+                
+                Spacer()
+                
+                Button {
+                    navigationManager.navigate(to: .profile)
+                } label: {
+                    VStack {
+                        Image(systemName: "person.circle")
+                            .font(.system(size: size.height / 3))
+                        
+                        Text("Profile")
+                            .font(.subheadline)
+                    }
+                    .foregroundColor(navigationManager.currentPage == .profile ? .txtPrimary : .txtSecondary)
+                    //                .offset(y: -10)
+                    .padding(.trailing, 40)
                 }
-                .foregroundColor(navigationManager.currentPage == .profile ? .txtPrimary : .txtSecondary)
-//                .offset(y: -10)
-                .padding(.trailing, 40)
             }
-            
+            HStack {
+                Spacer()
+                
+                // POINTS PLACEHOLDER INSERT API STUFF HERE
+                Text("\(userProfile?.points ?? 999)")
+                    .font(.system(size: size.height / 4))
+                    .bold()
+    //                .offset(y: 20)
+                
+                Spacer()
+            }
         }
         .frame(width: size.width, height: size.height)
         .foregroundColor(.txtPrimary)

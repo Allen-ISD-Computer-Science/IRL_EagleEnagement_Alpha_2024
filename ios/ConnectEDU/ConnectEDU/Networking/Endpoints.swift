@@ -8,6 +8,7 @@
 import Foundation
 
 enum Endpoints {
+    // Base API for the users vapor portal
     static let baseAPIURL = "https://stg.codermerlin.academy/vapor/logan-rohlfs/api"
 
     // Auth
@@ -27,6 +28,9 @@ enum Endpoints {
     // Clubs
     static let clubs = "\(baseAPIURL)/clubs/"
     static let club = "\(baseAPIURL)/club/"
+    
+    // Rewards
+    static let rewards = "\(baseAPIURL)/rewards/"
     
     // Other endpoints...
 }

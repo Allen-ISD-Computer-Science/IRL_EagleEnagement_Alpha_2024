@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct MissingPointsView: View {
+    @ObservedObject var navigationManager = NavigationManager.shared
+    
     var body: some View {
-        Text("Missing Points Page")
+        VStack {
+            Text("WIP Page: Missing Points")
+                .font(.title2)
+                .bold()
+
+            Button {
+                navigationManager.back()
+            } label: {
+                Image(systemName: "chevron.backward")
+                    .bold()
+                    .foregroundColor(.txtPrimary)
+                    .padding()
+                    .background(.indigoPrimary)
+                    .cornerRadius(90)
+            }
+        }
     }
 }
 
-// #Preview {
-//    MissingPointsView()
-// }
+ #Preview {
+    MissingPointsView()
+ }

@@ -6,15 +6,15 @@
 import SwiftUI
 
 struct DevView: View {
-    @EnvironmentObject var navigationManager: NavigationManager
-
+    @ObservedObject var navigationManager = NavigationManager.shared
+    
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("Navigation State")) {
                     Text("Current Page: \(navigationManager.currentPage.rawValue)")
                     Text("Current PageStack: \(navigationManager.dump())")
-                    Text("Current EventDetailID: \(navigationManager.currentEventID)")
+                    Text("Current EventDetailID: \(navigationManager.currentEventID ?? 999)")
                     Button("Clear Stack") {
                         navigationManager.popToRoot()
                     }

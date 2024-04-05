@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignupView: View {
-    @EnvironmentObject var navigationManager: NavigationManager
+    @ObservedObject var navigationManager = NavigationManager.shared
     @StateObject var viewModel: SignupViewModel
     
     var body: some View {

@@ -15,7 +15,27 @@ function RewardsPage(props) {
 
   const [filter, setFilter] = React.useState("");
 
-  const [rewards, setRewards] = React.useState(null);
+    const [rewards, setRewards] = React.useState(null);
+
+    const grades = {
+	"Fresh": 0b0001,
+	"Soph": 0b0010,
+	"Jun": 0b0100,
+	"Sen": 0b1000
+    }
+    
+    const gradeBitToString = (bits) => {
+	var res = [];
+	Object.keys(grades).forEach(grade => {
+	    if ((bits & grades[grade]) != 0) {
+		res.push(grade);
+	    }
+	})
+
+	return res.length > 0 ?
+	    (res.length === 4 ? "Any" :
+	     res.join(", ")) : "None";
+    }
 
   React.useEffect(() => {
     const getRewards = async () => {
@@ -109,7 +129,7 @@ function RewardsPage(props) {
                   <tr key={reward.id} className="text-l">
                     <td>{reward.name}</td>
                     <td>{reward.cost}</td>
-                    <td>{reward.allowedGrades}</td>
+                      <td>{gradeBitToString(reward.allowedGrades)}</td>
                     <td className="[&>*]:mx-4">
                       <a className="bg-blue-950 text-white px-4 py-2 rounded-xl" href={process.env.PUBLIC_URL + `/admin/rewards/edit/${reward.id}`}>
                         <FontAwesomeIcon icon={faEdit} size="lg" />

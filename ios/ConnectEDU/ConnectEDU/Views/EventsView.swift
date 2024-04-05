@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventsView: View {
-    @EnvironmentObject var navigationManager: NavigationManager
+    @ObservedObject var navigationManager = NavigationManager.shared
     @StateObject var viewModel = EventsViewModel()
     
     var body: some View {

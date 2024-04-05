@@ -9,7 +9,7 @@ import LoadingOverlay from "../../components/LoadingOverlay";
 import { Checkbox, FormControlLabel } from "@mui/material";
 
 function EventsPage(props) {
-  const searchRef  = React.useRef(null);
+  const searchRef = React.useRef(null);
 
   const [requests, setRequests] = React.useState(0);
 
@@ -27,10 +27,12 @@ function EventsPage(props) {
       };
       if (filter !== "") args.filterByName = filter;
 
-	const res = await fetch(`${process.env.PUBLIC_URL}/admin/api/events`, { headers: {
-	    Accept: "application/json",
-	    "Content-Type": "application/json"
-	}, method: "POST", body: JSON.stringify(args) });
+      const res = await fetch(`${process.env.PUBLIC_URL}/admin/api/events`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }, method: "POST", body: JSON.stringify(args)
+      });
 
       return await res.json();
     }
@@ -68,7 +70,7 @@ function EventsPage(props) {
               label="Show Past Events?"
               control={
                 <Checkbox
-                  style ={{
+                  style={{
                     color: "rgb(23 37 84)",
                   }}
                   name="showPast"
@@ -130,7 +132,7 @@ function EventsPage(props) {
                   <tr key={event.id} className="text-l">
                     <td>{event.name}</td>
                     <td>{event.locationName}</td>
-                      <td>{dayjs(event.startDate).format("MM/DD/YYYY hh:mm A")}</td>
+                    <td>{dayjs(event.startDate).format("MM/DD/YYYY hh:mm A")}</td>
                     <td className="[&>*]:mx-4">
                       <a className="bg-blue-950 text-white px-4 py-2 rounded-xl" href={process.env.PUBLIC_URL + `/admin/events/edit/${event.id}`}>
                         <FontAwesomeIcon icon={faEdit} size="lg" />

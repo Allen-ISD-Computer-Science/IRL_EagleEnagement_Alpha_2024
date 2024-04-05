@@ -28,6 +28,14 @@
 		786B07442B922A86000E425D /* ConnectEDUUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B07432B922A86000E425D /* ConnectEDUUITestsLaunchTests.swift */; };
 		786B2A572BB1C93C003132E4 /* ClubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A562BB1C93C003132E4 /* ClubView.swift */; };
 		786B2A592BB1E691003132E4 /* ClubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A582BB1E691003132E4 /* ClubViewModel.swift */; };
+		786B2A5B2BB309AD003132E4 /* RewardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A5A2BB309AD003132E4 /* RewardsViewModel.swift */; };
+		786B2A5D2BB30ABA003132E4 /* RewardCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A5C2BB30ABA003132E4 /* RewardCard.swift */; };
+		786B2A5F2BB30B0F003132E4 /* RewardListObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A5E2BB30B0F003132E4 /* RewardListObject.swift */; };
+		786B2A612BB35822003132E4 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A602BB35822003132E4 /* ProfileViewModel.swift */; };
+		786B2A632BB44F4D003132E4 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A622BB44F4D003132E4 /* EditProfileView.swift */; };
+		786B2A652BB49DA3003132E4 /* PointsHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A642BB49DA3003132E4 /* PointsHistoryView.swift */; };
+		786B2A672BB5B01E003132E4 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A662BB5B01E003132E4 /* DateFormatterExtension.swift */; };
+		786B2A692BB5B400003132E4 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A682BB5B400003132E4 /* Loading.swift */; };
 		78AC93692B9B70C900DFB57B /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AC93682B9B70C900DFB57B /* ForgotPasswordView.swift */; };
 		78AC936D2B9B756600DFB57B /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AC936C2B9B756600DFB57B /* ForgotPasswordViewModel.swift */; };
 		78AC936F2B9B9DF900DFB57B /* AuthLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AC936E2B9B9DF900DFB57B /* AuthLogo.swift */; };
@@ -98,6 +106,14 @@
 		786B07432B922A86000E425D /* ConnectEDUUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectEDUUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		786B2A562BB1C93C003132E4 /* ClubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubView.swift; sourceTree = "<group>"; };
 		786B2A582BB1E691003132E4 /* ClubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubViewModel.swift; sourceTree = "<group>"; };
+		786B2A5A2BB309AD003132E4 /* RewardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsViewModel.swift; sourceTree = "<group>"; };
+		786B2A5C2BB30ABA003132E4 /* RewardCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardCard.swift; sourceTree = "<group>"; };
+		786B2A5E2BB30B0F003132E4 /* RewardListObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardListObject.swift; sourceTree = "<group>"; };
+		786B2A602BB35822003132E4 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		786B2A622BB44F4D003132E4 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		786B2A642BB49DA3003132E4 /* PointsHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsHistoryView.swift; sourceTree = "<group>"; };
+		786B2A662BB5B01E003132E4 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
+		786B2A682BB5B400003132E4 /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		78AC93682B9B70C900DFB57B /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		78AC936C2B9B756600DFB57B /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		78AC936E2B9B9DF900DFB57B /* AuthLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLogo.swift; sourceTree = "<group>"; };
@@ -255,6 +271,7 @@
 				78B7BDB22B94EB4200F36936 /* Reward.swift */,
 				782155502B9A19050090DB7A /* Profile.swift */,
 				78F3E0712BA9DCBD008E040B /* ClubListObject.swift */,
+				786B2A5E2BB30B0F003132E4 /* RewardListObject.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -265,12 +282,14 @@
 				782155402B9966970090DB7A /* DevView.swift */,
 				78E46DE22B96357100E7D7F4 /* Components */,
 				78AC936A2B9B729100DFB57B /* Authentication */,
-				78B7BDB82B94F19E00F36936 /* EventsView.swift */,
-				78CDC3142B98E60900F8AAB3 /* EventView.swift */,
 				783528482B98CD3F0027D26A /* MissingPointsView.swift */,
 				7821554E2B9A16BE0090DB7A /* ProfileView.swift */,
+				786B2A642BB49DA3003132E4 /* PointsHistoryView.swift */,
+				786B2A622BB44F4D003132E4 /* EditProfileView.swift */,
 				782155482B9A11910090DB7A /* ClubsView.swift */,
 				786B2A562BB1C93C003132E4 /* ClubView.swift */,
+				78B7BDB82B94F19E00F36936 /* EventsView.swift */,
+				78CDC3142B98E60900F8AAB3 /* EventView.swift */,
 				7821554A2B9A119C0090DB7A /* RewardsView.swift */,
 			);
 			path = Views;
@@ -284,6 +303,8 @@
 				78F3E06B2BA87D34008E040B /* EventViewModel.swift */,
 				78F3E06D2BA9DA70008E040B /* ClubsViewModel.swift */,
 				786B2A582BB1E691003132E4 /* ClubViewModel.swift */,
+				786B2A5A2BB309AD003132E4 /* RewardsViewModel.swift */,
+				786B2A602BB35822003132E4 /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -321,6 +342,7 @@
 				78B7BDBF2B9546E000F36936 /* StringExtension.swift */,
 				78E46DE72B967F8900E7D7F4 /* DateExtension.swift */,
 				78E46DF12B97E2F500E7D7F4 /* ViewExtension.swift */,
+				786B2A662BB5B01E003132E4 /* DateFormatterExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -333,6 +355,8 @@
 				78E46DE32B96435300E7D7F4 /* EventCard.swift */,
 				782155462B9A11620090DB7A /* LowerNav.swift */,
 				78F3E06F2BA9DB41008E040B /* ClubCard.swift */,
+				786B2A5C2BB30ABA003132E4 /* RewardCard.swift */,
+				786B2A682BB5B400003132E4 /* Loading.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -347,7 +371,6 @@
 				786B071F2B922A85000E425D /* Sources */,
 				786B07202B922A85000E425D /* Frameworks */,
 				786B07212B922A85000E425D /* Resources */,
-				78CDC31B2B995EB700F8AAB3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -463,27 +486,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		78CDC31B2B995EB700F8AAB3 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftformat >/dev/null; then\n  swiftformat --config .swiftformat \"${SRCROOT}\"\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		786B071F2B922A85000E425D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -495,16 +497,23 @@
 				7821554B2B9A119C0090DB7A /* RewardsView.swift in Sources */,
 				78E46DEE2B9768F400E7D7F4 /* SignupViewModel.swift in Sources */,
 				782155492B9A11910090DB7A /* ClubsView.swift in Sources */,
+				786B2A5F2BB30B0F003132E4 /* RewardListObject.swift in Sources */,
 				78AC936F2B9B9DF900DFB57B /* AuthLogo.swift in Sources */,
 				782155472B9A11620090DB7A /* LowerNav.swift in Sources */,
+				786B2A672BB5B01E003132E4 /* DateFormatterExtension.swift in Sources */,
 				78B7BDB32B94EB4200F36936 /* Reward.swift in Sources */,
 				78E46DF42B97EBD400E7D7F4 /* NavigationManager.swift in Sources */,
+				786B2A692BB5B400003132E4 /* Loading.swift in Sources */,
+				786B2A5D2BB30ABA003132E4 /* RewardCard.swift in Sources */,
+				786B2A652BB49DA3003132E4 /* PointsHistoryView.swift in Sources */,
 				786B07292B922A85000E425D /* ContentView.swift in Sources */,
 				78692AF12B98E2F100BCA1E6 /* LoginView.swift in Sources */,
 				78F3E06C2BA87D34008E040B /* EventViewModel.swift in Sources */,
 				782155552B9A28860090DB7A /* VerifyView.swift in Sources */,
 				786B07272B922A85000E425D /* ConnectEDUApp.swift in Sources */,
 				78B7BDB12B94EB3200F36936 /* Club.swift in Sources */,
+				786B2A632BB44F4D003132E4 /* EditProfileView.swift in Sources */,
+				786B2A5B2BB309AD003132E4 /* RewardsViewModel.swift in Sources */,
 				783528492B98CD3F0027D26A /* MissingPointsView.swift in Sources */,
 				78F3E0722BA9DCBD008E040B /* ClubListObject.swift in Sources */,
 				78E46DE42B96435300E7D7F4 /* EventCard.swift in Sources */,
@@ -524,6 +533,7 @@
 				78B7BDAF2B94EB2100F36936 /* EventListObject.swift in Sources */,
 				78F3E0702BA9DB41008E040B /* ClubCard.swift in Sources */,
 				782155512B9A19050090DB7A /* Profile.swift in Sources */,
+				786B2A612BB35822003132E4 /* ProfileViewModel.swift in Sources */,
 				782155412B9966970090DB7A /* DevView.swift in Sources */,
 				78E46DF22B97E2F500E7D7F4 /* ViewExtension.swift in Sources */,
 				78E46DE12B9634EF00E7D7F4 /* EventsViewModel.swift in Sources */,

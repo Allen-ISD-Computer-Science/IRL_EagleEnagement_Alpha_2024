@@ -177,7 +177,7 @@ struct TeacherController : RouteCollection {
 
         let args = try req.content.decode(RequestQuery.self);
 
-        let eventRequest = EventRequest(name: args.name, description: args.description, eventType: args.eventType, location: args.location, startDate: args.startDate, endDate: args.endDate);
+        let eventRequest = EventRequest(name: args.name, description: args.description, eventType: args.eventType, location: args.location, startDate: args.startDate, endDate: args.endDate, userRequested: user.id!);
 
         try await eventRequest.save(on: req.db);
 

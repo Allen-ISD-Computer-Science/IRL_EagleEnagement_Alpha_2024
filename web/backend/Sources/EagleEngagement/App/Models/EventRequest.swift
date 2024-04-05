@@ -47,12 +47,13 @@ final public class EventRequest: Model, Content {
     // Creates a new, empty PointRequest.
     public init() { }
 
-    public init(name: String, description: String, eventType: String, location: String, startDate: Date, endDate: Date) {
+    public init(name: String, description: String, eventType: String, location: String, startDate: Date, endDate: Date, userRequested: Int) {
         self.name = name;
         self.description = description;
         self.eventType = eventType;
         self.location = location;
         self.startDate = startDate;
         self.endDate = endDate;
+        self.$user.id = userRequested;
     }
 }

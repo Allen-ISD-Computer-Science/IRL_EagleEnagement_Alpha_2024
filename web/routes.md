@@ -79,6 +79,7 @@ POST /api/events
 
 Returns: [{id: INT, name: String, eventType: String, locationName: String, pointsWorth: INT, startDate: Date, endDate: Date}]
 ```
+
 ^ Note: will not return events that have already passed.
 
 ```
@@ -90,7 +91,7 @@ Returns: {id: INT, name: String, eventType: String, descrition: String, location
 ```
 POST /api/clubs
 
-Returns: [{id: INT, name: String, descritpion: String}]
+Returns: [{id: INT, name: String, description: String}]
 ```
 
 ```
@@ -104,6 +105,7 @@ POST /api/rewards
 
 Returns: [ { id: Int, name: String, description: String, cost: Int } ]
 ```
+
 ^ Note: if user's grade is set, is filtered on it
 
 ```
@@ -224,6 +226,13 @@ POST /admin/api/eventRequest/:id
 Returns {name: String, description: String eventType: String, location: String, userRequested: String, startDate: Date, endDate: Date}
 ```
 
+```
+POST /admin/api/eventRequest/:id/delete
+
+Returns { success: Bool, msg: String }
+```
+
+
 ---
 
 ```
@@ -280,6 +289,7 @@ house: [Int]
 
 Returns: { amount: Int }
 ```
+
 ^ This gives a count of how many users fit into this classification
 
 ```
@@ -321,6 +331,18 @@ eventType: String
 location: String
 startDate: Date
 endDate: Date
+
+Returns { success: Bool, msg: String }
+```
+
+```
+POST /faculty/api/requestEvent
+name: String;
+eventType: String;
+description: String;
+location: String;
+startDate: Date;
+endDate: Date;
 
 Returns { success: Bool, msg: String }
 ```
