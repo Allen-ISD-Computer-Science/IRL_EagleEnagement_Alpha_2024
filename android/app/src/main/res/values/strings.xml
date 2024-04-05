@@ -67,6 +67,7 @@ Sat 10AM-3PM</string>
     <string name="lbl_ranking_grade">Ranking\n(Grade)</string>
     <string name="lbl_cs_forum">CS Forum</string>
     <string name="lbl_read_more">Read More</string>
+    <string name="lbl_read_less">Read Less</string>
     <string name="lbl_allen_hs_pac">Allen HS PAC</string>
     <string name="lbl_eagle">EAGLE</string>
     <string name="lbl">************</string>
@@ -134,7 +135,7 @@ Sat 10AM-3PM</string>
     <string name="lbl_event_check_in">Event Check-In</string>
     <string name="lbl_enter_evidence">Enter Evidence</string>
     <string name="lbl_ranking">Ranking</string>
-    <string name="msg_fall_exam_exemp">Fall Exam Exemptions - 50pts</string>
+    <string name="msg_fall_exam_exemp">Fall Exam Exemptions</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
