@@ -71,6 +71,13 @@ sealed class DataModel {
         var youtubeLink: String?
     ) : DataModel()
 
+    data class RewardResponse(
+        var id: Int,
+        var name: String,
+        var description: String,
+        var cost: Int
+    ) : DataModel()
+
     data class Response(
         var success: Boolean,
         var msg: String

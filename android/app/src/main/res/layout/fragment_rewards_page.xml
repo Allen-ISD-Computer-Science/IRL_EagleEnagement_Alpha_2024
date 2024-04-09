@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".RewardsFragment" xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout android:gravity="center_horizontal"
@@ -34,69 +35,15 @@
                     android:src="@drawable/img_lock"
                     tools:ignore="ContentDescription" tools:src="@drawable/img_lock"/>
             </LinearLayout>
-            <LinearLayout android:gravity="start"
-                android:id="@+id/linearRowfilter"
+            <androidx.recyclerview.widget.RecyclerView
+                android:gravity="center_horizontal"
+                android:id="@+id/rewardsRecycler"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_184pxh"
-                android:layout_marginStart="@dimen/_1pxh"
-                android:layout_marginTop="@dimen/_43pxv"
-                android:layout_width="wrap_content" android:orientation="horizontal">
-                <ImageView android:id="@+id/imageFilter"
-                    android:layout_height="@dimen/_33pxh"
-                    android:layout_width="@dimen/_33pxh"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/img_filter"
-                    tools:ignore="ContentDescription" tools:src="@drawable/img_filter"/>
-                <TextView android:ellipsize="end"
-                    android:id="@+id/txtAppliedCounter"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_4pxv"
-                    android:layout_marginStart="@dimen/_15pxh"
-                    android:layout_marginTop="@dimen/_2pxv"
-                    android:layout_width="match_parent"
-                    android:singleLine="true"
-                    android:text="@string/lbl_0_applied"
-                    style="@style/txtKhulaextrabold16" tools:text="@string/lbl_0_applied"/>
-            </LinearLayout>
-            <LinearLayout android:gravity="center_horizontal"
-                android:id="@+id/linearColumnfallexamexemp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_21pxv"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
-                android:orientation="vertical" style="@style/groupStylecornerRadius_4">
-                <TextView android:ellipsize="end"
-                    android:gravity="center_horizontal"
-                    android:id="@+id/txtFallExamExemp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_10pxh"
-                    android:layout_marginStart="@dimen/_15pxh"
-                    android:layout_marginTop="@dimen/_19pxv"
-                    android:layout_width="match_parent"
-                    android:singleLine="true"
-                    android:text="@string/msg_fall_exam_exemp"
-                    style="@style/txtKhulaextrabold20" tools:text="@string/msg_fall_exam_exemp"/>
-                <TextView android:gravity="center_horizontal"
-                    android:id="@+id/txtDescription"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_15pxh"
-                    android:layout_marginStart="@dimen/_15pxh"
-                    android:layout_marginTop="@dimen/_12pxv"
-                    android:layout_width="match_parent"
-                    android:text="@string/msg_make_sure_you_m"
-                    style="@style/txtKhulabold14" tools:text="@string/msg_make_sure_you_m"/>
-                <TextView android:ellipsize="end"
-                    android:id="@+id/txtReadMore"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_22pxv"
-                    android:layout_marginEnd="@dimen/_15pxh"
-                    android:layout_marginStart="@dimen/_15pxh"
-                    android:layout_marginTop="@dimen/_8pxv"
-                    android:layout_width="wrap_content"
-                    android:singleLine="true"
-                    android:text="@string/lbl_read_more"
-                    style="@style/txtKhulaextrabold16_3" tools:text="@string/lbl_read_more"/>
-            </LinearLayout>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

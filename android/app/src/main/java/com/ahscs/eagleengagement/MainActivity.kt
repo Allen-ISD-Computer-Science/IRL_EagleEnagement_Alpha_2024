@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
         val eventsList = EventsFragment(jwt!!)
         val clubsList = ClubsFragment(jwt!!)
-        val rewardsList = RewardsFragment()
+        val rewardsList = RewardsFragment(jwt!!)
 
         loadFragment(eventsList)
         bottomNav = findViewById(R.id.navBar)
