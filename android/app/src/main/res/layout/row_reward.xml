@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout android:gravity="center_horizontal"
+        android:id="@+id/linearColumnfallexamexemp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical" style="@style/groupStylecornerRadius_4">
+        <LinearLayout android:gravity="center_horizontal"
+            android:id="@+id/linearColumnrewardtitle"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal" style="@style/groupStylecornerRadius_4">
+
+            <TextView
+                android:id="@+id/txtRewardName"
+                style="@style/txtKhulaextrabold20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="@dimen/_10pxv"
+                android:layout_marginEnd="0dp"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:singleLine="true"
+                android:text="@string/msg_fall_exam_exemp"
+                tools:text="@string/msg_fall_exam_exemp" />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1">
+            </Space>
+            <TextView android:ellipsize="end"
+                android:id="@+id/txtRewardCost"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:paddingBottom="@dimen/_3pxv"
+                android:paddingEnd="@dimen/_4pxh"
+                android:paddingStart="@dimen/_4pxh"
+                android:paddingTop="@dimen/_1pxv"
+                android:singleLine="true"
+                android:text="@string/lbl_10"
+                style="@style/txtGradientRounded" tools:text="@string/lbl_10"/>
+        </LinearLayout>
+
+        <TextView android:gravity="center_horizontal"
+            android:id="@+id/txtRewardDescription"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_15pxh"
+            android:layout_marginStart="@dimen/_15pxh"
+            android:layout_marginTop="@dimen/_12pxv"
+            android:layout_width="match_parent"
+            android:maxLines="2"
+            android:text="@string/msg_make_sure_you_m"
+            style="@style/txtKhulabold14" tools:text="@string/msg_make_sure_you_m"/>
+        <TextView android:ellipsize="end"
+            android:id="@+id/txtReadMoreBtn"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_22pxv"
+            android:layout_marginEnd="@dimen/_15pxh"
+            android:layout_marginStart="@dimen/_15pxh"
+            android:layout_marginTop="@dimen/_8pxv"
+            android:layout_width="wrap_content"
+            android:singleLine="true"
+            android:text="@string/lbl_read_more"
+            style="@style/txtKhulaextrabold16_3" tools:text="@string/lbl_read_more"/>
+        <TextView android:ellipsize="end"
+            android:id="@+id/txtReadLessBtn"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_22pxv"
+            android:layout_marginEnd="@dimen/_15pxh"
+            android:layout_marginStart="@dimen/_15pxh"
+            android:layout_marginTop="@dimen/_8pxv"
+            android:layout_width="wrap_content"
+            android:singleLine="true"
+            android:text="@string/lbl_read_less"
+            style="@style/txtKhulaextrabold16_3" tools:text="@string/lbl_read_less"/>
+    </LinearLayout>
+</RelativeLayout>

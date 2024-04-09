@@ -43,4 +43,7 @@ interface RetrofitAPI {
 
     @POST("club/{id}")
     fun postClubContent(@Header ("Authorization") authToken: String, @Path("id") clubId: String): Call<DataModel.ClubContentResponse>
+
+    @POST("rewards")
+    fun postRewards(@Header("Authorization") authToken: String): Call<MutableList<DataModel.RewardResponse>>
 }

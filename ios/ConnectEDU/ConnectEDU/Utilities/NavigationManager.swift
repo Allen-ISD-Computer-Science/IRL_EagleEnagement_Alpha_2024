@@ -42,7 +42,7 @@ class NavigationManager: ObservableObject {
         case rewards
         case eventDetail
         case editProfile
-        case pointsHistory
+        case pointHistory
         // Add other pages as needed
     }
     
