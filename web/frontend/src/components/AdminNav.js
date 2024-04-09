@@ -11,7 +11,7 @@ function AdminNav(props) {
   const [isHidden, setIsHidden] = React.useState(true);
 
   const [cookies, setCookie] = useCookies(['admin-config']);
-  const [openCollapse, setOpenCollapse] = React.useState(cookies["admin-config"] === "down" ? false : true);    
+  const [openCollapse, setOpenCollapse] = React.useState(cookies["admin-config"] === "down" ? false : true);
 
   const handleOpenManage = () => {
     setCookie(cookies["admin-config"] === "down" ? "up" : "down");
@@ -27,19 +27,22 @@ function AdminNav(props) {
         <FontAwesomeIcon icon={faBars} size="2xl" />
       </button>
       <nav className={`h-full items-stretch bg-blue-950 flex max-w-[400px] z-40 w-full flex-col pb-12 ${isHidden ? "max-md:hidden" : "max-md:sticky"} max-md:w-[100vw] max-md:absolute max-md:max-w-full`}>
-        <img
-          loading="lazy"
-          srcSet={process.env.PUBLIC_URL + "/assets/images/logo.png"}
-          alt="Eagle Engagement Logo"
-          className="object-contain object-center w-full fill-white overflow-hidden shrink-0 max-w-full h-[150px] max-h-[150px] max-md:max-h-[100px] bg-[#001058] shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.2)]"
-        />
+        <div className="w-full min-w-[325px]">
+          <img
+            // loading="lazy"
+            srcSet={process.env.PUBLIC_URL + "/assets/images/logo.svg"}
+            alt="ConnectEDU Logo"
+            style={{ width: "100%", height: "150px", aspectRatio: "2/1", padding: "0.5rem", background: "rgba(0,0,0,0.1)" }}
+            className="shadow"
+          />
+        </div>
         <List className="[&_a]:mb-4 [&_span]:text-2xl [&_span]:text-center [&_*]:!text-white [&_*]:!font-semibold">
           <ListItemButton component="a" onClick={handleOpenManage}>
             <ListItemIcon className="flex-col items-center">
               <FontAwesomeIcon icon={faSliders} size="2xl" />
             </ListItemIcon>
             <ListItemText primary="Manage" />
-            { openCollapse ? <FontAwesomeIcon icon={faCaretUp} size="2xl" /> : <FontAwesomeIcon icon={faCaretDown} size="2xl" /> }
+            {openCollapse ? <FontAwesomeIcon icon={faCaretUp} size="2xl" /> : <FontAwesomeIcon icon={faCaretDown} size="2xl" />}
           </ListItemButton>
           <Collapse in={openCollapse} timeout="auto" className="ml-8" unmountOnExit>
             <List component="div" disablePadding>

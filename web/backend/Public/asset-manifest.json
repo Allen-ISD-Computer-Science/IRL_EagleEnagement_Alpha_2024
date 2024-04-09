@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/vapor/brett-kaplan/static/css/main.fad6f7f0.css",
-    "main.js": "/vapor/brett-kaplan/static/js/main.5245908d.js",
+    "main.css": "/vapor/brett-kaplan/static/css/main.ceacae33.css",
+    "main.js": "/vapor/brett-kaplan/static/js/main.5a173f5a.js",
     "static/media/placeholder-4x3.svg": "/vapor/brett-kaplan/static/media/placeholder-4x3.ce753c1201b545fd4ace526dda36e2da.svg",
     "static/media/placeholder.svg": "/vapor/brett-kaplan/static/media/placeholder.086d5f35d3476f8ffd88e10aa83699a2.svg",
     "index.html": "/vapor/brett-kaplan/index.html",
-    "main.fad6f7f0.css.map": "/vapor/brett-kaplan/static/css/main.fad6f7f0.css.map",
-    "main.5245908d.js.map": "/vapor/brett-kaplan/static/js/main.5245908d.js.map"
+    "main.ceacae33.css.map": "/vapor/brett-kaplan/static/css/main.ceacae33.css.map",
+    "main.5a173f5a.js.map": "/vapor/brett-kaplan/static/js/main.5a173f5a.js.map"
   },
   "entrypoints": [
-    "static/css/main.fad6f7f0.css",
-    "static/js/main.5245908d.js"
+    "static/css/main.ceacae33.css",
+    "static/js/main.5a173f5a.js"
   ]
 }

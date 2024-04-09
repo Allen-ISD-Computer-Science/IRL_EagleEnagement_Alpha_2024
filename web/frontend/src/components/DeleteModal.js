@@ -24,16 +24,16 @@ export default function DeleteModal(props) {
                 <div className='p-2'></div>
 
                 <div className='flex flex-row justify-center align-center gap-4'>
-                    {/* Submit button */}
+                    {/* Cancel button */}
                     <Button
-                        variant="contained"
+                        variant="outlined"
                         color="primary"
                         onClick={() => { if (props.setOpen) props.setOpen(false) }}
                     >
                         Cancel
                     </Button>
 
-                    {/* Cancel button */}
+                    {/* Delete button */}
                     <Button
                         variant="contained"
                         color="error"

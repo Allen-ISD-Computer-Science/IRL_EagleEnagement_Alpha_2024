@@ -66,7 +66,7 @@ function ClubPage(props) {
 		    >
 			<div className="flex flex-col">
 			    <img
-				srcSet={process.env.PUBLIC_URL + "/clubLogos/" + clubID}
+				srcSet={process.env.PUBLIC_URL + "/pictures/clubLogos/" + clubID}
 				alt={clubObj?.name + " Logo"}
 				className="aspect-square object-contain object-center w-[185px] mx-3 overflow-hidden shrink-0 max-w-full rounded-[50%] max-md:mt-10"
 			    />

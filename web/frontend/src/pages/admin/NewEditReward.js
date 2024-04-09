@@ -1,19 +1,25 @@
 import * as React from "react";
-import dayjs from "dayjs";
 
-import { DateTimePicker, TimePicker } from "@mui/x-date-pickers";
 import { ToastContainer, toast } from 'react-toastify';
 
 import AdminNav from "../../components/AdminNav";
 import LoadingOverlay from "../../components/LoadingOverlay";
-import { Autocomplete, Button, MenuItem, Select, TextField } from "@mui/material";
+import { Button, MenuItem, Select, TextField } from "@mui/material";
 
 function NewEditRewardPage(props) {
   const [title, setTitle] = React.useState("New Reward");
 
   const [rewardInfo, setRewardInfo] = React.useState({});
+  const [allowedGrades, setAllowedGrades] = React.useState([]);
 
   const [requests, setRequests] = React.useState(0);
+
+  const grades = {
+    "Fresh": 0b0001,
+    "Soph": 0b0010,
+    "Jun": 0b0100,
+    "Sen": 0b1000
+  }
 
   React.useEffect(() => {
     const rewardID = parseInt(window.location.pathname.split("/").pop());
@@ -29,7 +35,25 @@ function NewEditRewardPage(props) {
       getReward().then((reward) => {
         document.title = "Edit Reward - " + reward.name;
         setTitle("Edit Reward - " + reward.name);
+
+        const gradesObj = {
+          "Fresh": 0b0001,
+          "Soph": 0b0010,
+          "Jun": 0b0100,
+          "Sen": 0b1000
+        }
+
         setRewardInfo(reward);
+        const gradeBits = reward.allowedGrades;
+        const selectedGrades = [];
+        Object.keys(gradesObj).forEach(grade => {
+            if ((gradeBits & gradesObj[grade]) !== 0) {
+		selectedGrades.push(`${gradesObj[grade]}`);
+          }
+        });
+	  console.log("Selected Grades: " + selectedGrades);
+        setAllowedGrades(selectedGrades);
+
         setRequests((prev) => prev - 1);
       }).catch((err) => {
         setRequests((prev) => prev - 1);
@@ -44,16 +68,9 @@ function NewEditRewardPage(props) {
       name: "",
       description: "",
       cost: -1,
-      gradesAllowed: -1
+      allowedGrades: -1
     });
   }, []);
-
-    const grades = {
-	"Fresh": 0b0001,
-	"Soph": 0b0010,
-	"Jun": 0b0100,
-	"Sen": 0b1000
-    }
 
   const saveButtonClicked = async () => {
     var isNew = true;
@@ -194,29 +211,33 @@ function NewEditRewardPage(props) {
               />
             </div>
 
-	      <label className="block text-gray-700 text-sm font-bold mb-2 mt-4" htmlFor="allowedGrades">
-		  Allowed Grades
-	      </label>
-	      <Select
+            <label className="block text-gray-700 text-sm font-bold mb-2 mt-4" htmlFor="allowedGrades">
+              Allowed Grades
+            </label>
+            <Select
               className="border bg-gray-100 rounded-xl w-full"
               name="allowedGrades"
-//		  value={}
-		  onChange={(e) => {
-		      const bitVal = e.currentTarget.value.reduce((a, c) => parseInt(a) + parseInt(c));
+              value={allowedGrades}
+              onChange={(e) => {
+                setAllowedGrades(e.target.value);
+                    const bitVal = e.target.value.reduce((a, c) => parseInt(a) + parseInt(c));
+		    console.log(e.target.value, bitVal);
                 setRewardInfo({
                   ...rewardInfo,
                   allowedGrades: bitVal
+                });
+              }}
+              multiple
+            >
+              {
+                Object.keys(grades).map((grade) => {
+                  return (
+                      <MenuItem value={`${grades[grade]}`}>
+                      {grade}
+                    </MenuItem>
+                  )
                 })
-		  }}
-		  multiple
-              >
-		  {
-		      Object.keys(grades).map((grade) => {
-			  <MenuItem value={grades[grade]}>
-			      {grade}
-			  </MenuItem>
-		      })
-		  }
+              }
             </Select>
 
             <label className="block text-gray-700 text-sm font-bold mb-2 mt-4" htmlFor="points">
@@ -228,7 +249,7 @@ function NewEditRewardPage(props) {
               type="number"
               name="points"
               value={rewardInfo.cost === -1 ? "" : rewardInfo.cost}
-		onChange={(e) => {
+              onChange={(e) => {
                 setRewardInfo({
                   ...rewardInfo,
                   cost: parseInt(e.currentTarget.value)
@@ -259,7 +280,7 @@ function NewEditRewardPage(props) {
                 variant="contained"
                 color="error"
                 component="a"
-                href={process.env.PUBLIC_URL + "/admin/events"}
+                href={process.env.PUBLIC_URL + "/admin/rewards"}
               >
                 Cancel
               </Button>

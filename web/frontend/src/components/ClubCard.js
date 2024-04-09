@@ -13,7 +13,7 @@ function ClubCard(props) {
               <div className="flex flex-col items-stretch w-[26%] max-md:w-full max-md:ml-0">
                 <img
                   loading="lazy"
-                  srcSet={process.env.PUBLIC_URL + "/clubLogos/" + props.clubID}
+                  srcSet={process.env.PUBLIC_URL + "/pictures/clubLogos/" + props.clubID}
                   alt={props.clubName + " Logo"}
                   className="aspect-square object-contain object-center w-[185px] overflow-hidden shrink-0 max-w-full rounded-[50%] max-md:mt-10"
                 />

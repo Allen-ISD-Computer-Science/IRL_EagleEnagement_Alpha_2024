@@ -114,6 +114,14 @@ POST /api/reward/:id/purchase
 Returns: { success: Bool, msg: String }
 ```
 
+```
+POST /api/pointHistory
+
+Returns [{ reason: String, points: Int, date: Date }]
+```
+
+^ Note: Is returned sorted by date decending.
+
 ## Web
 
 ### Authentication
