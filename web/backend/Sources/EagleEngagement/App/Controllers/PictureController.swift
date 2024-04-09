@@ -9,6 +9,30 @@ struct PictureController : RouteCollection {
         }
         return path;
     }
+
+    func mimeType(for data: Data) -> String {
+        var b: UInt8 = 0
+        data.copyBytes(to: &b, count: 1)
+
+        switch b {
+        case 0xFF:
+            return "image/jpeg"
+        case 0x89:
+            return "image/png"
+        case 0x47:
+            return "image/gif"
+        case 0x4D, 0x49:
+            return "image/tiff"
+        case 0x25:
+            return "application/pdf"
+        case 0xD0:
+            return "application/vnd"
+        case 0x46:
+            return "text/plain"
+        default:
+            return "application/octet-stream"
+        }
+    } 
     
     //    let fileManager = NSFileManager.defaultManager()
     
@@ -71,6 +95,10 @@ struct PictureController : RouteCollection {
         
         let data = try req.content.decode(ImageUploadData.self)
 
+        guard (mimeType(for: data.picture).starts(with: "image")) else {
+            throw Abort(.badRequest, reason: "Not a jpeg/png file!");
+        }
+
         try await req.fileio.writeFile(.init(data: data.picture), at: "\(storagePath())/clubLogos/\(id)");
 
         return Msg(success: true, msg: "\(club.club.name)'s Logo Updated!");
@@ -97,6 +125,10 @@ struct PictureController : RouteCollection {
         }
         
         let data = try req.content.decode(ImageUploadData.self)
+
+        guard (mimeType(for: data.picture).starts(with: "image")) else {
+            throw Abort(.badRequest, reason: "Not a jpeg/png file!");
+        }
 
         try await req.fileio.writeFile(.init(data: data.picture), at: "\(storagePath())/clubThumbnails/\(id)");
 
