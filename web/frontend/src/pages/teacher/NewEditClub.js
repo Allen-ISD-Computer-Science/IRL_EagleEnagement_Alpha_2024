@@ -150,11 +150,13 @@ function NewEditClubPage(props) {
 	}
 
 	const updateMapValues = (latlng, radius) => {
-		setClubInfo({
-			...clubInfo,
-			latitude: latlng.lat,
-			longitude: latlng.lng,
-			radius: radius
+		setClubInfo((info) => {
+			return {
+				...info,
+				latitude: latlng.lat,
+				longitude: latlng.lng,
+				radius: radius
+			}
 		});
 	}
 
