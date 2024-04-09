@@ -22,6 +22,9 @@ function NewEditClubPage(props) {
 		latitude: -1, longitude: -1, radius: 50
 	});
 
+	const clubLogoRef = React.useRef(null);
+	const clubThumbnailRef = React.useRef(null);
+
 	const [requests, setRequests] = React.useState(0);
 
 	React.useEffect(() => {
@@ -86,26 +89,14 @@ function NewEditClubPage(props) {
 			for (let i = 0; i < keys.length; i++) {
 				const key = keys[i];
 				if (filteredInfo[key] === "" || filteredInfo[key] === null || filteredInfo[key] === -1) {
-					toast.error(`${key} cannot be empty if locationName is set!`, {
-						position: "top-right",
-						autoClose: 2000,
-						closeOnClick: true,
-						pauseOnHover: true,
-						theme: "light"
-					});
+					toast.error(`${key} cannot be empty if locationName is set!`);
 					return;
 				}
 			}
 		}
 
 		if (requests > 0) {
-			toast.error(`Request already made. Please wait!`, {
-				position: "top-right",
-				autoClose: 2000,
-				closeOnClick: true,
-				pauseOnHover: true,
-				theme: "light"
-			});
+			toast.error(`Request already made. Please wait!`);
 			return;
 		}
 
@@ -123,13 +114,55 @@ function NewEditClubPage(props) {
 			setRequests((prev) => prev - 1);
 
 			if (res.status === 200) {
-				toast.success(`${isNew ? "Created" : "Updated"} club!`, {
-					position: "top-right",
-					autoClose: 2000,
-					closeOnClick: true,
-					pauseOnHover: true,
-					theme: "light"
-				});
+				toast.success(`${isNew ? "Created" : "Updated"} club!`);
+
+				if (isNew) {
+					if (filteredInfo.clugLogo !== "" && clubLogoRef.current !== null && clubLogoRef.current?.files.length > 0) {
+						setRequests((prev) => prev + 1);
+
+						try {
+							const formData = new FormData();
+							formData.append("picture", clubLogoRef.current.files[0]);
+							const res = await fetch(`${process.env.PUBLIC_URL}/pictures/clubLogos/${clubID}/upload`, {
+								method: "POST",
+								body: formData
+							});
+
+							setRequests((prev) => prev - 1);
+
+							if (res.status === 200) {
+								toast.success("Uploaded club logo!");
+							} else {
+								toast.error("Failed to upload club logo!");
+							}
+						} catch(err) {
+							setRequests((prev) => prev - 1);
+						}
+					}
+
+					if (filteredInfo.clubThumbnail !== "" && clubThumbnailRef.current !== null && clubThumbnailRef.current?.files.length > 0) {
+						setRequests((prev) => prev + 1);
+
+						try {
+							const formData = new FormData();
+							formData.append("picture", filteredInfo.clubThumbnail);
+							const res = await fetch(`${process.env.PUBLIC_URL}/pictures/clubThumbnails/${clubID}/upload`, {
+								method: "POST",
+								body: formData
+							});
+
+							setRequests((prev) => prev - 1);
+
+							if (res.status === 200) {
+								toast.success("Uploaded club thumbnail!");
+							} else {
+								toast.error("Failed to upload club thumbnail!");
+							}
+						} catch(err) {
+							setRequests((prev) => prev - 1);
+						}
+					}
+				}
 			} else {
 				const json = await res.json();
 				var errorText = res.statusText || json.reason;
@@ -230,25 +263,63 @@ function NewEditClubPage(props) {
 								<label className="block text-gray-700 text-sm font-bold mb-2 mt-4" htmlFor="clubLogo">
 									Club Logo
 								</label>
-								<Image
-									src={`${process.env.PUBLIC_URL}/club/${clubID}/logo.png`}
-									height={400}
-									width={400}
-									alt={`${clubInfo?.name || "The Club"}'s Logo`}
-									placeholderSrc={placeHolderLogo}
-								/>
+								<Button
+									id="clubLogo"
+									variant="text"
+									onClick={()=>clubLogoRef.current.click()}
+								>
+									<input
+										ref={clubLogoRef}
+										accept="image/*"
+										style={{ display: 'none' }}
+										id="raised-button-file"
+										type="file"
+										onChange={() => {
+											setClubInfo({
+												...clubInfo,
+												clubLogo: clubLogoRef.current?.files[0]?.name || ""
+											})
+										}}
+									/>
+									<Image
+										src={`${process.env.PUBLIC_URL}/pictures/clubLogos/${clubID}`}
+										height={400}
+										width={400}
+										alt={`${clubInfo?.name || "The Club"}'s Logo`}
+										placeholderSrc={placeHolderLogo}
+									/>
+								</Button>
 							</div>
 							<div className="flex-initial">
-								<label className="block text-gray-700 text-sm font-bold mb-2 mt-4" htmlFor="clubLogo">
+								<label className="block text-gray-700 text-sm font-bold mb-2 mt-4" htmlFor="clubThumbnail">
 									Club Thumbnail
 								</label>
-								<Image
-									src={`${process.env.PUBLIC_URL}/club/${clubID}/logo.png`}
-									height={400}
-									width={534}
-									alt={`${clubInfo?.name || "The Club"}'s Logo`}
-									placeholderSrc={placeHolderThumbnail}
-								/>
+								<Button
+									id="clubThumbnail"
+									variant="text"
+									onClick={()=>clubThumbnailRef.current.click()}
+								>
+									<input
+										ref={clubThumbnailRef}
+										accept="image/*"
+										style={{ display: 'none' }}
+										id="raised-button-file"
+										type="file"
+										onChange={() => {
+											setClubInfo({
+												...clubInfo,
+												clubThumbnail: clubThumbnailRef.current?.files[0]?.name || ""
+											})
+										}}
+									/>
+									<Image
+										src={`${process.env.PUBLIC_URL}/pictures/clubThumbnails/${clubID}`}
+										height={400}
+										width={534}
+										alt={`${clubInfo?.name || "The Club"}'s Logo`}
+										placeholderSrc={placeHolderLogo}
+									/>
+								</Button>
 							</div>
 						</div>
 
