@@ -83,6 +83,14 @@ Returns: [{id: INT, name: String, eventType: String, locationName: String, point
 ^ Note: will not return events that have already passed.
 
 ```
+POST /api/events/past
+
+Returns: [{id: INT, name: String, eventType: String, locationName: String, pointsWorth: INT, startDate: Date, endDate: Date}]
+```
+
+^ Note: will return events that have already started (even if they were ended).
+
+```
 POST /api/event/:id
 
 Returns: {id: INT, name: String, eventType: String, descrition: String, locationName: String, address: String, pointsWorth: INT, startDate: Date, endDate: Date}
