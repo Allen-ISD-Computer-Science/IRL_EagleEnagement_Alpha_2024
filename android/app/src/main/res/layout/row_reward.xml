@@ -58,7 +58,7 @@
             android:layout_marginStart="@dimen/_15pxh"
             android:layout_marginTop="@dimen/_12pxv"
             android:layout_width="match_parent"
-            android:maxLines="2"
+            android:maxLines="3"
             android:text="@string/msg_make_sure_you_m"
             style="@style/txtKhulabold14" tools:text="@string/msg_make_sure_you_m"/>
         <TextView android:ellipsize="end"
@@ -85,5 +85,23 @@
             android:singleLine="true"
             android:text="@string/lbl_read_less"
             style="@style/txtKhulaextrabold16_3" tools:text="@string/lbl_read_less"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBuy"
+            style="@style/btnSolidRounded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingTop="@dimen/_11pxv"
+            android:paddingBottom="@dimen/_11pxv"
+            android:singleLine="true"
+            android:text="Buy"
+            android:textAllCaps="false"
+            tools:text="Buy" />
     </LinearLayout>
 </RelativeLayout>

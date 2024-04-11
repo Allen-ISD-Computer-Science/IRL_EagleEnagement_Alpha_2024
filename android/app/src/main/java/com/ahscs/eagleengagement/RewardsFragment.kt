@@ -19,7 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RewardsFragment(jwt: String) : Fragment() {
-    private val jwt = jwt
+    val jwt = jwt
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +34,11 @@ class RewardsFragment(jwt: String) : Fragment() {
         val recycler : RecyclerView = view.findViewById(R.id.rewardsRecycler)
         recycler.adapter = adapter
 
-        adapter.setOnClickListener(object : RewardAdapter.OnClickListener {
-            override fun onClick(position: Int, model: DataModel.RewardResponse) {
-
-            }
-        })
+//        adapter.setOnClickListener(object : RewardAdapter.OnClickListener {
+//            override fun onClick(position: Int, model: DataModel.RewardResponse) {
+//
+//            }
+//        })
 
         return view
     }

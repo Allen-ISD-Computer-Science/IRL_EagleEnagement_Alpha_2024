@@ -46,4 +46,7 @@ interface RetrofitAPI {
 
     @POST("rewards")
     fun postRewards(@Header("Authorization") authToken: String): Call<MutableList<DataModel.RewardResponse>>
+
+    @POST("reward/{id}/purchase")
+    fun postBuyReward(@Header("Authorization") authToken: String, @Path("id") rewardId: String): Call<DataModel.Response>
 }
