@@ -40,8 +40,8 @@ struct ContentView: View {
                 ClubView(club_id: navigationManager.currentClubID ?? 0)
             case .editProfile:
                 EditProfileView()
-            case .pointsHistory:
-                PointsHistoryView()
+            case .pointHistory:
+                PointHistoryView()
             default:
                 Text("Page does not exist")
                 // Add other cases as needed

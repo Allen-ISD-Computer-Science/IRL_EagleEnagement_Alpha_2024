@@ -40,7 +40,7 @@ struct ProfileView: View {
                             HStack {
                                 Text("Points:")
                                 Button {
-                                    navigationManager.navigate(to: .pointsHistory)
+                                    navigationManager.navigate(to: .pointHistory)
                                 } label: {
                                     Image(systemName: "clock.arrow.circlepath")
                                         .padding(5)

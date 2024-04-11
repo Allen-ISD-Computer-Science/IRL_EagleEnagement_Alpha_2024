@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7802C2752BBEEFDD00A4F118 /* UpperHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7802C2742BBEEFDD00A4F118 /* UpperHeader.swift */; };
 		782155412B9966970090DB7A /* DevView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782155402B9966970090DB7A /* DevView.swift */; };
 		782155432B9A0EE70090DB7A /* AuthBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782155422B9A0EE70090DB7A /* AuthBackground.swift */; };
 		782155452B9A0FB30090DB7A /* UpperNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782155442B9A0FB30090DB7A /* UpperNav.swift */; };
@@ -18,6 +19,9 @@
 		782155532B9A25330090DB7A /* VerifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782155522B9A25330090DB7A /* VerifyViewModel.swift */; };
 		782155552B9A28860090DB7A /* VerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782155542B9A28860090DB7A /* VerifyView.swift */; };
 		783528492B98CD3F0027D26A /* MissingPointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783528482B98CD3F0027D26A /* MissingPointsView.swift */; };
+		784AE4BF2BBEFA6F00946713 /* PointHistoryListObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784AE4BE2BBEFA6F00946713 /* PointHistoryListObject.swift */; };
+		784AE4C52BBEFD4200946713 /* PointHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784AE4C42BBEFD4200946713 /* PointHistoryView.swift */; };
+		784AE4C72BBEFD5700946713 /* PointHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784AE4C62BBEFD5700946713 /* PointHistoryViewModel.swift */; };
 		78692AF12B98E2F100BCA1E6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B7BDB62B94EBB000F36936 /* LoginView.swift */; };
 		786B07272B922A85000E425D /* ConnectEDUApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B07262B922A85000E425D /* ConnectEDUApp.swift */; };
 		786B07292B922A85000E425D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B07282B922A85000E425D /* ContentView.swift */; };
@@ -33,7 +37,6 @@
 		786B2A5F2BB30B0F003132E4 /* RewardListObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A5E2BB30B0F003132E4 /* RewardListObject.swift */; };
 		786B2A612BB35822003132E4 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A602BB35822003132E4 /* ProfileViewModel.swift */; };
 		786B2A632BB44F4D003132E4 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A622BB44F4D003132E4 /* EditProfileView.swift */; };
-		786B2A652BB49DA3003132E4 /* PointsHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A642BB49DA3003132E4 /* PointsHistoryView.swift */; };
 		786B2A672BB5B01E003132E4 /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A662BB5B01E003132E4 /* DateFormatterExtension.swift */; };
 		786B2A692BB5B400003132E4 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B2A682BB5B400003132E4 /* Loading.swift */; };
 		78AC93692B9B70C900DFB57B /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AC93682B9B70C900DFB57B /* ForgotPasswordView.swift */; };
@@ -82,6 +85,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7802C2742BBEEFDD00A4F118 /* UpperHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpperHeader.swift; sourceTree = "<group>"; };
 		782155402B9966970090DB7A /* DevView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevView.swift; sourceTree = "<group>"; };
 		782155422B9A0EE70090DB7A /* AuthBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBackground.swift; sourceTree = "<group>"; };
 		782155442B9A0FB30090DB7A /* UpperNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpperNav.swift; sourceTree = "<group>"; };
@@ -93,6 +97,9 @@
 		782155522B9A25330090DB7A /* VerifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewModel.swift; sourceTree = "<group>"; };
 		782155542B9A28860090DB7A /* VerifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyView.swift; sourceTree = "<group>"; };
 		783528482B98CD3F0027D26A /* MissingPointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingPointsView.swift; sourceTree = "<group>"; };
+		784AE4BE2BBEFA6F00946713 /* PointHistoryListObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryListObject.swift; sourceTree = "<group>"; };
+		784AE4C42BBEFD4200946713 /* PointHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryView.swift; sourceTree = "<group>"; };
+		784AE4C62BBEFD5700946713 /* PointHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryViewModel.swift; sourceTree = "<group>"; };
 		78692AEF2B98E21E00BCA1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		786B07232B922A85000E425D /* ConnectEDU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectEDU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		786B07262B922A85000E425D /* ConnectEDUApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectEDUApp.swift; sourceTree = "<group>"; };
@@ -111,7 +118,6 @@
 		786B2A5E2BB30B0F003132E4 /* RewardListObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardListObject.swift; sourceTree = "<group>"; };
 		786B2A602BB35822003132E4 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		786B2A622BB44F4D003132E4 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
-		786B2A642BB49DA3003132E4 /* PointsHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsHistoryView.swift; sourceTree = "<group>"; };
 		786B2A662BB5B01E003132E4 /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		786B2A682BB5B400003132E4 /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		78AC93682B9B70C900DFB57B /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
@@ -272,6 +278,7 @@
 				782155502B9A19050090DB7A /* Profile.swift */,
 				78F3E0712BA9DCBD008E040B /* ClubListObject.swift */,
 				786B2A5E2BB30B0F003132E4 /* RewardListObject.swift */,
+				784AE4BE2BBEFA6F00946713 /* PointHistoryListObject.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -284,13 +291,13 @@
 				78AC936A2B9B729100DFB57B /* Authentication */,
 				783528482B98CD3F0027D26A /* MissingPointsView.swift */,
 				7821554E2B9A16BE0090DB7A /* ProfileView.swift */,
-				786B2A642BB49DA3003132E4 /* PointsHistoryView.swift */,
 				786B2A622BB44F4D003132E4 /* EditProfileView.swift */,
 				782155482B9A11910090DB7A /* ClubsView.swift */,
 				786B2A562BB1C93C003132E4 /* ClubView.swift */,
 				78B7BDB82B94F19E00F36936 /* EventsView.swift */,
 				78CDC3142B98E60900F8AAB3 /* EventView.swift */,
 				7821554A2B9A119C0090DB7A /* RewardsView.swift */,
+				784AE4C42BBEFD4200946713 /* PointHistoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -305,6 +312,7 @@
 				786B2A582BB1E691003132E4 /* ClubViewModel.swift */,
 				786B2A5A2BB309AD003132E4 /* RewardsViewModel.swift */,
 				786B2A602BB35822003132E4 /* ProfileViewModel.swift */,
+				784AE4C62BBEFD5700946713 /* PointHistoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -352,6 +360,7 @@
 			children = (
 				78AC93702B9B9EF400DFB57B /* Authentication */,
 				782155442B9A0FB30090DB7A /* UpperNav.swift */,
+				7802C2742BBEEFDD00A4F118 /* UpperHeader.swift */,
 				78E46DE32B96435300E7D7F4 /* EventCard.swift */,
 				782155462B9A11620090DB7A /* LowerNav.swift */,
 				78F3E06F2BA9DB41008E040B /* ClubCard.swift */,
@@ -502,10 +511,10 @@
 				782155472B9A11620090DB7A /* LowerNav.swift in Sources */,
 				786B2A672BB5B01E003132E4 /* DateFormatterExtension.swift in Sources */,
 				78B7BDB32B94EB4200F36936 /* Reward.swift in Sources */,
+				784AE4C72BBEFD5700946713 /* PointHistoryViewModel.swift in Sources */,
 				78E46DF42B97EBD400E7D7F4 /* NavigationManager.swift in Sources */,
 				786B2A692BB5B400003132E4 /* Loading.swift in Sources */,
 				786B2A5D2BB30ABA003132E4 /* RewardCard.swift in Sources */,
-				786B2A652BB49DA3003132E4 /* PointsHistoryView.swift in Sources */,
 				786B07292B922A85000E425D /* ContentView.swift in Sources */,
 				78692AF12B98E2F100BCA1E6 /* LoginView.swift in Sources */,
 				78F3E06C2BA87D34008E040B /* EventViewModel.swift in Sources */,
@@ -528,7 +537,9 @@
 				78B7BDBB2B94F30300F36936 /* KeychainService.swift in Sources */,
 				78CDC3152B98E60900F8AAB3 /* EventView.swift in Sources */,
 				78B7BDC02B9546E000F36936 /* StringExtension.swift in Sources */,
+				784AE4C52BBEFD4200946713 /* PointHistoryView.swift in Sources */,
 				786B2A592BB1E691003132E4 /* ClubViewModel.swift in Sources */,
+				784AE4BF2BBEFA6F00946713 /* PointHistoryListObject.swift in Sources */,
 				78E46DE82B967F8900E7D7F4 /* DateExtension.swift in Sources */,
 				78B7BDAF2B94EB2100F36936 /* EventListObject.swift in Sources */,
 				78F3E0702BA9DB41008E040B /* ClubCard.swift in Sources */,
@@ -541,6 +552,7 @@
 				78AC936D2B9B756600DFB57B /* ForgotPasswordViewModel.swift in Sources */,
 				78B7BDB52B94EB9500F36936 /* LoginViewModel.swift in Sources */,
 				78B7BDA72B94E8C300F36936 /* User.swift in Sources */,
+				7802C2752BBEEFDD00A4F118 /* UpperHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

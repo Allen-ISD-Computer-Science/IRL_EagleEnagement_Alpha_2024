@@ -38,6 +38,7 @@ class KeychainService {
 
         if status == noErr {
             if let data = dataTypeRef as? Data {
+                print("Data: \(String(data: data, encoding: .utf8))")
                 return String(data: data, encoding: .utf8)
             }
         }

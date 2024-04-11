@@ -11,6 +11,7 @@ import HomePage from "./pages/Home.js"
 import ErrorPage from "./pages/error.js"
 import SignInPage from "./pages/SignIn.js"
 import SignUpPage from "./pages/SignUp.js"
+import VerifyPage from './pages/Verify.js'
 
 // Teacher Pages
 import ClubsDashboard from './pages/teacher/ClubsDashboard.js';
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUpPage />,
+  },
+  {
+    path: "/verify",
+    element: <VerifyPage />,
   },
   {
     path: "/dashboard",

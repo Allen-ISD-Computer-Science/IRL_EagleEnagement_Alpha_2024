@@ -12,9 +12,9 @@ function SignInPage(props) {
   const [password, setPassword] = React.useState("");
   const [passwordType, setPasswordType] = React.useState("password");
 
-    const [errorText, setErrorText] = React.useState("");
+  const [errorText, setErrorText] = React.useState("");
 
-    const [didReq, setDidReq] = React.useState(false);
+  const [didReq, setDidReq] = React.useState(false);
 
   const validateInfo = (email) => {
     if (email !== "" && (!email.includes("@") || !email.includes(".") || email.split("@").pop().length < 2 || email.split(".").pop().length < 2)) {
@@ -38,10 +38,10 @@ function SignInPage(props) {
       return false;
     }
 
-      if (didReq) {
-	  setErrorText("Already sent request! Please wait.");
-	  return false;
-      }
+    if (didReq) {
+      setErrorText("Already sent request! Please wait.");
+      return false;
+    }
 
     return true;
   }
@@ -56,8 +56,8 @@ function SignInPage(props) {
       const res = await fetch("./login", { method: "POST", headers });
       console.log(res);
 
-	setDidReq(false);
-	
+      setDidReq(false);
+
       if (res.status === 200) {
         toast.success("Successfully logged in. Redirecting...", {
           position: "top-right",
@@ -66,16 +66,16 @@ function SignInPage(props) {
           pauseOnHover: true,
           theme: "light"
         });
-          setTimeout(() => {
-	      const url = new URL(window.location.href);
+        setTimeout(() => {
+          const url = new URL(window.location.href);
 
-	      console.log(url.searchParams);
+          console.log(url.searchParams);
 
-	      if (url.searchParams.has("redirect")) {
-		  window.location.href = process.env.PUBLIC_URL + url.searchParams.get("redirect");
-	      } else {
-		  window.location.href = process.env.PUBLIC_URL + "/dashboard";
-	      }
+          if (url.searchParams.has("redirect")) {
+            window.location.href = process.env.PUBLIC_URL + url.searchParams.get("redirect");
+          } else {
+            window.location.href = process.env.PUBLIC_URL + "/dashboard";
+          }
         }, 1000);
       } else {
         toast.error(res.status === 401 ? "Invalid Credentials." : res.statusText, {
@@ -110,11 +110,11 @@ function SignInPage(props) {
 
       <span className="shadow-lg bg-blue-950 flex w-[650px] max-w-full flex-col mb-5 pl-12 pr-8 pb-2.5 rounded-2xl max-md:px-5 text-white">
         <img
-          srcSet={process.env.PUBLIC_URL + "/assets/images/logo.png"}
-          alt="Eagle Engagement Logo"
-          className="h-40 mb-[-80px]"
+          srcSet={process.env.PUBLIC_URL + "/assets/images/logo.svg"}
+          alt="ConnectEDU Logo"
+          className="h-40 mt-6"
         />
-        <div className="justify-center items-center self-stretch flex flex-col mt-11 px-16 max-md:max-w-full max-md:mt-10 max-md:px-5">
+        <div className="justify-center items-center self-stretch flex flex-col mt-6 px-16 max-md:max-w-full max-md:mt-10 max-md:px-5">
           <div className="flex max-w-full flex-col items-center">
             <FontAwesomeIcon icon={faSignIn} size="4x" />
             <span className="text-center text-5xl font-bold whitespace-nowrap items-stretch self-stretch mt-5 pb-7 px-3 max-md:text-4xl">
@@ -148,12 +148,12 @@ function SignInPage(props) {
               placeholder=""
               aria-label="Password"
               value={password}
-		onChange={(e) => setPassword(e.target.value)}
-		onKeyDown={(e) => {
-		    if (e.key === "Enter") {
-			submitLogin();
-		    }
-		}}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  submitLogin();
+                }
+              }}
 
             />
             <button
@@ -161,7 +161,7 @@ function SignInPage(props) {
               type="button"
               onClick={() => {
                 setPasswordType(passwordType === "password" ? "text" : "password");
-		}}
+              }}
             >
               <FontAwesomeIcon
                 icon={passwordType === "password" ? faEyeSlash : faEye}

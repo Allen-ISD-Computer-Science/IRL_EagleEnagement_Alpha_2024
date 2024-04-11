@@ -14,6 +14,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 import JWT
+import FCM
 import Vapor
 import Fluent
 import FluentMySQLDriver
@@ -44,6 +45,8 @@ func configure(_ app: Application) throws {
     }
 
     app.jwt.signers.use(.hs256(key: jwtSecret));
+
+    app.fcm.configuration = .envServiceAccountKeyFields;
     
     var tls = TLSConfiguration.makeClientConfiguration()
     tls.certificateVerification = .none
