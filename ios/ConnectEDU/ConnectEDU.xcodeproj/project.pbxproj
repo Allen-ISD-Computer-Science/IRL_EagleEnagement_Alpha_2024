@@ -65,6 +65,8 @@
 		78F3E06E2BA9DA70008E040B /* ClubsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F3E06D2BA9DA70008E040B /* ClubsViewModel.swift */; };
 		78F3E0702BA9DB41008E040B /* ClubCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F3E06F2BA9DB41008E040B /* ClubCard.swift */; };
 		78F3E0722BA9DCBD008E040B /* ClubListObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F3E0712BA9DCBD008E040B /* ClubListObject.swift */; };
+		78F7E27B2BC4357000B2DE97 /* MissingPointsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F7E27A2BC4357000B2DE97 /* MissingPointsViewModel.swift */; };
+		78F7E27D2BC4378300B2DE97 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F7E27C2BC4378300B2DE97 /* EditProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +149,8 @@
 		78F3E06D2BA9DA70008E040B /* ClubsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubsViewModel.swift; sourceTree = "<group>"; };
 		78F3E06F2BA9DB41008E040B /* ClubCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubCard.swift; sourceTree = "<group>"; };
 		78F3E0712BA9DCBD008E040B /* ClubListObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubListObject.swift; sourceTree = "<group>"; };
+		78F7E27A2BC4357000B2DE97 /* MissingPointsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingPointsViewModel.swift; sourceTree = "<group>"; };
+		78F7E27C2BC4378300B2DE97 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +317,8 @@
 				786B2A5A2BB309AD003132E4 /* RewardsViewModel.swift */,
 				786B2A602BB35822003132E4 /* ProfileViewModel.swift */,
 				784AE4C62BBEFD5700946713 /* PointHistoryViewModel.swift */,
+				78F7E27A2BC4357000B2DE97 /* MissingPointsViewModel.swift */,
+				78F7E27C2BC4378300B2DE97 /* EditProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -502,6 +508,7 @@
 			files = (
 				786B2A572BB1C93C003132E4 /* ClubView.swift in Sources */,
 				782155452B9A0FB30090DB7A /* UpperNav.swift in Sources */,
+				78F7E27B2BC4357000B2DE97 /* MissingPointsViewModel.swift in Sources */,
 				78AC93712B9BAE4D00DFB57B /* EventsView.swift in Sources */,
 				7821554B2B9A119C0090DB7A /* RewardsView.swift in Sources */,
 				78E46DEE2B9768F400E7D7F4 /* SignupViewModel.swift in Sources */,
@@ -521,6 +528,7 @@
 				782155552B9A28860090DB7A /* VerifyView.swift in Sources */,
 				786B07272B922A85000E425D /* ConnectEDUApp.swift in Sources */,
 				78B7BDB12B94EB3200F36936 /* Club.swift in Sources */,
+				78F7E27D2BC4378300B2DE97 /* EditProfileViewModel.swift in Sources */,
 				786B2A632BB44F4D003132E4 /* EditProfileView.swift in Sources */,
 				786B2A5B2BB309AD003132E4 /* RewardsViewModel.swift in Sources */,
 				783528492B98CD3F0027D26A /* MissingPointsView.swift in Sources */,

@@ -42,8 +42,8 @@ struct ContentView: View {
                 EditProfileView()
             case .pointHistory:
                 PointHistoryView()
-            default:
-                Text("Page does not exist")
+//            default:
+//                Text("Page does not exist")
                 // Add other cases as needed
             }
         }

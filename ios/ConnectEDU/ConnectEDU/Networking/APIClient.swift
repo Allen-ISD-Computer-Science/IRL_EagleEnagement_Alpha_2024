@@ -9,7 +9,7 @@ import Foundation
 
 struct APIService {
     
-    // LOGIN
+    // MARK: Login
     
     static func login(email: String, password: String, completion: @escaping (Bool, String?) -> Void) {
         let body: [String: Any] = [
@@ -30,11 +30,10 @@ struct APIService {
         task.resume()
     }
     
-    // FORGOT PASSWORD
-    
-    static let forgotPasswordURLString = Endpoints.forgotPassword
+    // MARK: Forgot Password
     
     static func forgotPassword(email: String, studentID: String, completion: @escaping (Bool, String?) -> Void) {
+        
         let body: [String: Any] = [
             "email": email,
             "studentID": Int(studentID)! // TODO: Fix this
@@ -53,7 +52,7 @@ struct APIService {
         task.resume()
     }
     
-    // SIGN UP
+    // MARK: Signup
     
     static func signup(firstName: String, lastName: String, email: String, studentID: String, completion: @escaping (Bool, String?) -> Void) {
         let body: [String: Any] = [
@@ -76,7 +75,7 @@ struct APIService {
         task.resume()
     }
     
-    // VERIFY
+    // MARK: Verify
     
     static func verify(email: String, token: String, password: String, passwordConfirm: String, completion: @escaping (Bool, String?) -> Void) {
         let body: [String: Any] = [
@@ -99,7 +98,7 @@ struct APIService {
         task.resume()
     }
     
-    // PROFILE
+    // MARK: Profile
     
     static func getProfile(completion: @escaping (Profile?, String?) -> Void) {
         guard let token = KeychainService.shared.retrieveToken(),
@@ -132,7 +131,7 @@ struct APIService {
         task.resume()
     }
     
-    // CLUBS
+    // MARK: Clubs
     
     static func getClubs(completion: @escaping ([ClubListObject]?, String?) -> Void) {
         guard let token = KeychainService.shared.retrieveToken(),
@@ -165,59 +164,12 @@ struct APIService {
         task.resume()
     }
     
-    // Club
-//    static func getClub(clubId: Int, completion: @escaping (Club?, String?) -> Void) {
-//        let clubURLString = "\(Endpoints.club)/\(clubId)"
-//        
-//        guard var request = createRequest(urlString: clubURLString, httpMethod: "POST") else {
-//            completion(nil, "Invalid URL")
-//            return
-//        }
-//        
-//        // Retrieve the token from Keychain
-//        if let token = KeychainService.shared.retrieveToken() {
-//            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-//        } else {
-//            completion(nil, "Authorization token not found")
-//            return
-//        }
-//        
-//        let task = URLSession.shared.dataTask(with: request) { data, _, error in
-//            guard let data = data, error == nil else {
-//                completion(nil, "Network error")
-//                return
-//            }
-//            
-//            do {
-//                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-//                   let name = json["name"] as? String,
-//                   let description = json["description"] as? String,
-//                   let sponsors = json["sponsors"] as? String,
-//                   let meetingTimes = json["meetingTimes"] as? String?,
-//                   let locationName = json["locationName"] as? String?,
-//                   let websiteLink = json["websiteLink"] as? String?,
-//                   let instagramLink = json["instagramLink"] as? String?,
-//                   let twitterLink = json["twitterLink"] as? String?,
-//                   let youtubeLink = json["youtubeLink"] as? String? {
-//                    
-//                    let club = Club(name: name, description: description, sponsors: sponsors, meetingTimes: meetingTimes, locationName: locationName, websiteLink: websiteLink, instagramLink: instagramLink, twitterLink: twitterLink, youtubeLink: youtubeLink)
-//                    completion(club, nil)
-//                } else {
-//                    completion(nil, "Failed to parse JSON")
-//                }
-//            } catch {
-//                completion(nil, "JSON parsing error")
-//            }
-//        }
-//        
-//        task.resume()
-//    }
+    // MARK: Club
     
     static func getClub(clubId: Int, completion: @escaping (Club?, String?) -> Void) {
-        let clubURLString = "\(Endpoints.club)/\(clubId)"
         
         guard let token = KeychainService.shared.retrieveToken(),
-              let request = createRequest(urlString: clubURLString, httpMethod: "POST", token: token) else {
+              let request = createRequest(urlString: "\(Endpoints.club)/\(clubId)", httpMethod: "POST", token: token) else {
             NavigationManager.shared.resetAuthenticationState()
             completion(nil, "Invalid URL or Authorization token not found")
             return
@@ -247,72 +199,11 @@ struct APIService {
     }
 
     
-    // EVENTS
+    // MARK: Events
     
-    static let eventsURLString = Endpoints.events
-    
-//    static func getEvents(completion: @escaping ([EventListObject]?, String?) -> Void) {
-//        let url = URL(string: eventsURLString)!
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        
-//        // Retrieve the token from Keychain
-//        if let token = KeychainService.shared.retrieveToken() {
-//            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-//        } else {
-//            completion(nil, "Authorization token not found")
-//            return
-//        }
-//        
-//        let task = URLSession.shared.dataTask(with: request) { data, _, error in
-//            guard let data = data, error == nil else {
-//                completion(nil, "Network error or no data")
-//                return
-//            }
-//            
-//            do {
-//                if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
-//                    var events = [EventListObject]()
-//                    
-//                    for json in jsonArray {
-//                        if let id = json["id"] as? Int,
-//                           let name = json["name"] as? String,
-//                           let eventType = json["eventType"] as? String,
-//                           let locationName = json["locationName"] as? String,
-//                           let pointsWorth = json["pointsWorth"] as? Int,
-//                           let startDateStr = json["startDate"] as? String,
-//                           let endDateStr = json["endDate"] as? String
-//                        {
-//                            let formatter = DateFormatter()
-//                            formatter.locale = Locale(identifier: "en_US_POSIX")
-//                            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-//                            let startDate = formatter.date(from: startDateStr)
-//                            let endDate = formatter.date(from: endDateStr)
-//                            
-//                            let event = EventListObject(id: id, name: name /* , description: description */, eventType: eventType, locationName: locationName, pointsWorth: pointsWorth, startDate: startDate!, endDate: endDate!)
-//                            events.append(event)
-//                        }
-//                    }
-//                    DispatchQueue.main.async {
-//                        completion(events, nil)
-//                    }
-//                } else {
-//                    DispatchQueue.main.async {
-//                        completion(nil, "Failed to parse JSON")
-//                    }
-//                }
-//            } catch {
-//                DispatchQueue.main.async {
-//                    completion(nil, "JSON parsing error")
-//                }
-//            }
-//        }
-//        
-//        task.resume()
-//    }
     
     static func getEvents(completion: @escaping ([EventListObject]?, String?) -> Void) {
+        
         guard let token = KeychainService.shared.retrieveToken(),
               let request = createRequest(urlString: Endpoints.events, httpMethod: "POST", token: token) else {
             NavigationManager.shared.resetAuthenticationState()
@@ -346,68 +237,13 @@ struct APIService {
 
         task.resume()
     }
-
-
     
-    // Event
-//    static func getEvent(eventId: Int, completion: @escaping (Event?, String?) -> Void) {
-//        let eventURLString = "\(Endpoints.event)/\(eventId)"
-//        
-//        guard var request = createRequest(urlString: eventURLString, httpMethod: "POST") else {
-//            completion(nil, "Invalid URL")
-//            return
-//        }
-//        
-//        // Retrieve the token from Keychain
-//        if let token = KeychainService.shared.retrieveToken() {
-//            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-//        } else {
-//            completion(nil, "Authorization token not found")
-//            return
-//        }
-//        
-//        let task = URLSession.shared.dataTask(with: request) { data, _, error in
-//            guard let data = data, error == nil else {
-//                completion(nil, "Network error")
-//                return
-//            }
-//            
-//            do {
-//                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-//                   let id = json["id"] as? Int,
-//                   let name = json["name"] as? String,
-//                   let eventType = json["eventType"] as? String,
-//                   let description = json["description"] as? String,
-//                   let locationName = json["locationName"] as? String,
-//                   let address = json["address"] as? String,
-//                   let pointsWorth = json["pointsWorth"] as? Int,
-//                   let startDateStr = json["startDate"] as? String,
-//                   let endDateStr = json["endDate"] as? String {
-//                    
-//                    let formatter = DateFormatter()
-//                    formatter.locale = Locale(identifier: "en_US_POSIX")
-//                    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-//                    let startDate = formatter.date(from: startDateStr)
-//                    let endDate = formatter.date(from: endDateStr)
-//                    
-//                    let event = Event(id: id, name: name, eventType: eventType, description: description, locationName: locationName, address: address, pointsWorth: pointsWorth, startDate: startDate!, endDate: endDate!)
-//                    completion(event, nil)
-//                } else {
-//                    completion(nil, "Failed to parse JSON")
-//                }
-//            } catch {
-//                completion(nil, "JSON parsing error")
-//            }
-//        }
-//        
-//        task.resume()
-//    }
+    // MARK: Event
     
     static func getEvent(eventId: Int, completion: @escaping (Event?, String?) -> Void) {
-        let eventURLString = "\(Endpoints.event)/\(eventId)"
 
         guard let token = KeychainService.shared.retrieveToken(),
-              let request = createRequest(urlString: eventURLString, httpMethod: "POST", token: token) else {
+              let request = createRequest(urlString: "\(Endpoints.event)/\(eventId)", httpMethod: "POST", token: token) else {
             NavigationManager.shared.resetAuthenticationState()
             completion(nil, "Invalid URL or Authorization token not found")
             return
@@ -438,7 +274,7 @@ struct APIService {
         task.resume()
     }
     
-    // Points History Req
+    // MARK: Point History
     static func fetchPointHistory(completion: @escaping ([PointHistoryListObject]?, String?) -> Void) {
         guard let request = createRequest(urlString: Endpoints.pointHistory, httpMethod: "POST", body: nil) else {
             completion(nil, "Invalid request.")
@@ -463,7 +299,7 @@ struct APIService {
     }
 
     
-    // REWARDS
+    // MARK: Rewards
 
     static func getRewards(completion: @escaping ([RewardListObject]?, String?) -> Void) {
         guard let token = KeychainService.shared.retrieveToken(),
@@ -513,7 +349,7 @@ struct APIService {
     }
 
     
-    // API Methods
+    // MARK: API Sub-Methods
     
     // Creates a URLRequest
     private static func createRequest(urlString: String, httpMethod: String, body: [String: Any]? = nil, token: String? = nil) -> URLRequest? {
