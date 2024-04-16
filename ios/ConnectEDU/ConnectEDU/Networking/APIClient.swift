@@ -299,7 +299,46 @@ struct APIService {
         task.resume()
     }
     
+    // MARK: Event History
+    
+    static func getEventHistory(completion: @escaping ([EventListObject]?, String?) -> Void) {
+        
+        guard let token = KeychainService.shared.retrieveToken(),
+              let request = createRequest(urlString: Endpoints.eventHistory, httpMethod: "POST", token: token) else {
+            NavigationManager.shared.resetAuthenticationState()
+            completion(nil, "Invalid URL or Authorization token not found")
+            return
+        }
+
+        print("Request: \(request)")
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            checkForUnauthorizedResponse(response: response) // Check for 403 error code
+            
+            guard let data = data, error == nil else {
+                completion(nil, "Network error or no data")
+                return
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+                let events = try decoder.decode([EventListObject].self, from: data)
+                DispatchQueue.main.async {
+                    completion(events, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(nil, "Failed to parse JSON")
+                }
+            }
+        }
+
+        task.resume()
+    }
+    
     // MARK: Point History
+    
     static func fetchPointHistory(completion: @escaping ([PointHistoryListObject]?, String?) -> Void) {
         guard let request = createRequest(urlString: Endpoints.pointHistory, httpMethod: "POST", body: nil) else {
             completion(nil, "Invalid request.")
