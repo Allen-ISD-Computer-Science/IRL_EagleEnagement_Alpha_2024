@@ -20,6 +20,7 @@ enum Endpoints {
 
     // Profile
     static let profile = "\(baseAPIURL)/profile/"
+    static let editProfile = "\(baseAPIURL)/profile/edit"
     
     // Events
     static let events = "\(baseAPIURL)/events/"

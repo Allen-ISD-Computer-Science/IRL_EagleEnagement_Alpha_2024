@@ -131,6 +131,31 @@ struct APIService {
         task.resume()
     }
     
+    // MARK: Edit Profile
+
+    static func editProfile(name: String, studentID: Int, grade: Int, house: Int, completion: @escaping (Bool, String?) -> Void) {
+        let body: [String: Any] = [
+            "name": name,
+            "studentID": studentID,
+            "grade": grade,
+            "house": house
+        ]
+        
+        guard let token = KeychainService.shared.retrieveToken(),
+              let request = createRequest(urlString: Endpoints.editProfile, httpMethod: "POST", body: body, token: token) else {
+            NavigationManager.shared.resetAuthenticationState()
+            completion(false, "Invalid URL or Authorization token not found")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            checkForUnauthorizedResponse(response: response) // Check for 401 or 403 error code
+            handleResponse(data: data, error: error, completion: completion)
+        }
+        
+        task.resume()
+    }
+    
     // MARK: Clubs
     
     static func getClubs(completion: @escaping ([ClubListObject]?, String?) -> Void) {
