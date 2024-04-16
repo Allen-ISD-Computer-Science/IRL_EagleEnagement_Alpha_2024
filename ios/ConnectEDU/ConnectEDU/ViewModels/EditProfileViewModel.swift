@@ -13,7 +13,17 @@ class EditProfileViewModel : ObservableObject {
     @Published var studentID: Int = 0
     @Published var grade: Int = 0
     @Published var house: Int = 0
+    @Published var resultMessage: String = ""
     
+    func editProfile() {
+        APIService.editProfile(name: name, studentID: studentID, grade: grade, house: house) { result, msg in
+            if let msg = msg {
+                self.resultMessage = msg
+            } else {
+                self.resultMessage = "Invalid Profile Information"
+            }
+        }
+    }
     
     func getProfile() {
         APIService.getProfile { profile, error in

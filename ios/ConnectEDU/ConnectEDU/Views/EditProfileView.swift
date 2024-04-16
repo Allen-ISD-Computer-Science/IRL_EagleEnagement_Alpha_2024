@@ -16,20 +16,46 @@ struct EditProfileView: View {
         GeometryReader { geometry in
             ZStack {
                 VStack {
-                    TextField("Name", text: $viewModel.name)
+                    VStack {
+                        TextField("Name", text: $viewModel.name)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(/*@START_MENU_TOKEN@*/ .none/*@END_MENU_TOKEN@*/)
+                            .padding(.horizontal)
+                            .padding(.vertical, 10)
+                        
+                        TextField("Student ID", value: $viewModel.studentID, format: .number)
+                            .padding(.horizontal)
+                            .padding(.vertical, 10)
+                        
+                        TextField("Grade", value: $viewModel.grade, format: .number)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(/*@START_MENU_TOKEN@*/ .none/*@END_MENU_TOKEN@*/)
+                            .padding(.horizontal)
+                            .padding(.vertical, 10)
+                        
+                        TextField("House", value: $viewModel.house, format: .number)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(/*@START_MENU_TOKEN@*/ .none/*@END_MENU_TOKEN@*/)
+                            .padding(.horizontal)
+                            .padding(.vertical, 10)
+                        
+                    }
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocapitalization(/*@START_MENU_TOKEN@*/ .none/*@END_MENU_TOKEN@*/)
+                    .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.8)
+                    .onAppear {
+                        viewModel.getProfile()
+                    }
                     
-                    TextField("Student ID", value: $viewModel.studentID, format: .number)
+                    Spacer()
                     
-                    TextField("Grade", value: $viewModel.grade, format: .number)
-                    
-                    TextField("House", value: $viewModel.house, format: .number)
+                    Button {
+                        viewModel.editProfile()
+                    } label: {
+                        Text("Submit")
+                    }
                 }
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(/*@START_MENU_TOKEN@*/ .none/*@END_MENU_TOKEN@*/)
-                .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.8)
-                .onAppear {
-                    viewModel.getProfile()
-                }
+                .frame(width: geometry.size.width, height: geometry.size.height * 0.825)
                 
                 VStack {
                     UpperHeader(size: CGSize(width: geometry.size.width, height: geometry.size.height * 0.175), pageTitle: "Edit Profile")
