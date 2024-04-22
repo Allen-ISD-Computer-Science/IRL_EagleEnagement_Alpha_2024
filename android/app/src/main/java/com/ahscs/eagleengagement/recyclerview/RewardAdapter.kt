@@ -5,6 +5,7 @@ import android.provider.ContactsContract.Data
 import android.view.LayoutInflater
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.ahscs.eagleengagement.ClubsFragment
 import com.ahscs.eagleengagement.MainActivity
@@ -39,6 +40,20 @@ class RewardAdapter(fragment: RewardsFragment) : RecyclerView.Adapter<RewardView
         holder.itemView.setOnClickListener {
 //            onClickListener!!.onClick(position, reward)
             holder.toggleRead()
+        }
+        holder.getBuyButton()?.setOnClickListener {
+            val builder = AlertDialog.Builder(context.context!!, com.google.android.material.R.style.Theme_AppCompat_Dialog_Alert)
+            builder.setCancelable(true)
+            builder.setTitle("Confirm Purchase")
+            builder.setMessage("Please make sure you meet any other requirements for this reward prior to purchasing.")
+            builder.setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.setPositiveButton("Confirm") { dialog, _ ->
+                dialog.dismiss()
+                holder.buyReward(reward, context)
+            }
+            builder.show()
         }
     }
 
