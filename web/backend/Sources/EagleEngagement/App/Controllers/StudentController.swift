@@ -32,6 +32,7 @@ struct StudentController : RouteCollection {
         protectedRoutes.post("profile", "edit", use: editProfile);
         
         protectedRoutes.post("events", use: fetchEvents);
+        protectedRoutes.post("events", "past", use: fetchPastEvents);
         protectedRoutes.post("event", ":id", use: fetchEvent);
         protectedRoutes.post("event", ":id", "checkIn", use: checkInEvent);
         
@@ -253,6 +254,30 @@ struct StudentController : RouteCollection {
           .field(Events.self, \.$pointsWorth)
           .field(Events.self, \.$startDate)
           .field(Events.self, \.$endDate)
+          .all()
+          .map { ev in
+              let both = try ev.joined(Location.self);
+              return EventInfo.init(id: ev.id!, name: ev.name, eventType: ev.eventType, locationName: both.locationName, pointsWorth: ev.pointsWorth, startDate: ev.startDate, endDate: ev.endDate)
+          };
+
+        return events;
+    }
+
+    func fetchPastEvents(_ req: Request) async throws -> [EventInfo] {
+        let currentDate = Date()
+        
+        let events = try await Events.query(on: req.db)
+          .join(Location.self, on: \Events.$location.$id == \Location.$id)
+          .filter(Events.self, \.$startDate <= currentDate)
+          .sort(Events.self, \.$startDate, .descending)
+          .field(Events.self, \.$id)
+          .field(Events.self, \.$name)
+          .field(Events.self, \.$eventType)
+          .field(Location.self, \.$locationName)
+          .field(Events.self, \.$pointsWorth)
+          .field(Events.self, \.$startDate)
+          .field(Events.self, \.$endDate)
+          .limit(20)
           .all()
           .map { ev in
               let both = try ev.joined(Location.self);
