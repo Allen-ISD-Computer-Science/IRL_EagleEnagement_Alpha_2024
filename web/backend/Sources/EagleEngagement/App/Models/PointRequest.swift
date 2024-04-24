@@ -51,4 +51,16 @@ final public class PointRequest: Model, Content {
     
     // Creates a new, empty PointRequest.
     public init() { }
+
+    public init(userID: Int, eventID: Int, reason: String, imagePath: String?, latitude: Float?, longitude: Float?) {
+        self.userID = userID;
+        self.eventID = eventID;
+        self.reason = reason;
+        self.date = Date();
+        self.status = .unseen;
+        self.latitude = latitude;
+        self.longitude = longitude;
+        self.imagePath = imagePath;
+    }
 }
+

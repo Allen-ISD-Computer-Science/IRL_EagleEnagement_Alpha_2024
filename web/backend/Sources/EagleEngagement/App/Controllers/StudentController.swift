@@ -43,6 +43,8 @@ struct StudentController : RouteCollection {
         protectedRoutes.post("reward", ":id", "purchase", use: purchaseReward);
 
         protectedRoutes.post("pointHistory", use: fetchPointHistory);
+
+        protectedRoutes.post("missingPoints", "request", use: requestMissingPoints);
     }
 
     func login(_ req: Request) async throws -> Msg {
@@ -568,5 +570,80 @@ struct StudentController : RouteCollection {
           };
 
         return pointHistory;
+    }
+
+    func mimeType(for data: Data) -> String {
+        var b: UInt8 = 0
+        data.copyBytes(to: &b, count: 1)
+
+        switch b {
+        case 0xFF:
+            return "image/jpeg"
+        case 0x89:
+            return "image/png"
+        case 0x47:
+            return "image/gif"
+        case 0x4D, 0x49:
+            return "image/tiff"
+        case 0x25:
+            return "application/pdf"
+        case 0xD0:
+            return "application/vnd"
+        case 0x46:
+            return "text/plain"
+        default:
+            return "application/octet-stream"
+        }
+    }
+
+    func storagePath() -> String {
+        guard let path = Environment.get("STORAGE_PERMANENT_PATH") else {
+            fatalError("Failed to determine STORAGE_PERMANENT_PATH from environment");
+        }
+        return path;
+    }
+
+    struct MissingRequestForm : Content {
+        var eventID: Int;
+        var reason: String;
+        var picture: Data?;
+        var latitude: Float?;
+        var longitude: Float?;
+        var accuracy: Float?;
+    }
+    
+    func requestMissingPoints(_ req: Request) async throws -> Msg {
+        let args = try req.content.decode(MissingRequestForm.self);
+
+        let userToken = try req.jwt.verify(as: UserToken.self);
+
+        guard let studentUser = try await StudentUser.query(on: req.db)
+                .with(\.$user)
+                .filter(\.$user.$id == userToken.userId)
+                .first()
+        else {
+            throw Abort(.unauthorized);
+        }
+
+        if let acc = args.accuracy, acc > 1000 {
+            return Msg(success: false, msg: "Location is too inacurate.");
+        }
+
+        var imagePath : String? = nil;
+        if let pic = args.picture {
+            guard (mimeType(for: pic).starts(with: "image")) else {
+                throw Abort(.badRequest, reason: "Not a jpeg/png file!");
+            }
+
+            imagePath = "\(storagePath())/missingPoints/\(studentUser.user.id!)-\(args.eventID)-\(UUID().uuidString)";
+            
+            try await req.fileio.writeFile(.init(data: pic), at: imagePath!);
+        }
+
+        let request = PointRequest(userID: studentUser.user.id!, eventID: args.eventID, reason: args.reason, imagePath: imagePath, latitude: args.latitude, longitude: args.longitude);
+
+        try await request.save(on: req.db);
+
+        return Msg(success: true, msg: "Missing Points Request made!");
     }
 }

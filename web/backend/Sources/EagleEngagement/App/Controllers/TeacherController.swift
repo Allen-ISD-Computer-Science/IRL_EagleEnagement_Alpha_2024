@@ -12,6 +12,7 @@ struct TeacherController : RouteCollection {
         let apiRoutes = teacherProtectedRoutes.grouped("api"); // /faculty/api
         apiRoutes.post("clubs", use: fetchClubs);
         apiRoutes.post("club", ":id", use: fetchClub);
+        apiRoutes.post("club", ":id", use: editClub);
 
         apiRoutes.post("requestEvent", use: requestEvent);
     }
