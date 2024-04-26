@@ -9,6 +9,8 @@ import { Circle, MapContainer, Marker, TileLayer, Popup, useMap } from 'react-le
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import PlaceholderImage from '../assets/placeholder.svg';
+
 function MissingPointsCarousel(props) {
     function MapRefComponent() {
         console.log(chosenCheckIn, requests[chosenCheckIn])
@@ -34,14 +36,14 @@ function MissingPointsCarousel(props) {
     const [isBlurred, setIsBlurred] = React.useState(false);
 
     const [requests, setRequests] = React.useState([
-        { studentName: "Brett Kaplan", studentId: "123456", event: "Allen v. North Crowley", eventCoordinates: { lat: 32.92968306464252, lng: -97.11231812644931 }, studentLoc: { lat: 33.1097, lng: -96.6608 }, eventCategory: "Football", imageURL: "https://www.oneathletic.com/cdn/shop/files/one-athletic-tracksuit-running.jpg", prevAttended: 4 },
-        { studentName: "Testing User", studentId: "123456", event: "Allen v. North Crowley", eventCoordinates: { lat: 32.92968306464252, lng: -97.11231812644931 }, studentLoc: { lat: 32.92968306464252, lng: -97.11371812644931 }, eventCategory: "Football", imageURL: "https://www.oneathletic.com/cdn/shop/files/OA-101.jpg", prevAttended: 6 },
-        { studentName: "Other Kaplan", studentId: "123456", event: "Allen v. North Crowley", eventCoordinates: { lat: 32.92968306464252, lng: -97.11231812644931 }, studentLoc: { }, eventCategory: "Football", imageURL: "https://i.pinimg.com/474x/2c/59/67/2c59674a6afc97d7d239f824cc577567.jpg", prevAttended: 0 },
+        // { studentName: "Brett Kaplan", studentId: "123456", event: "Allen v. North Crowley", eventCoordinates: { lat: 32.92968306464252, lng: -97.11231812644931 }, studentLoc: { lat: 33.1097, lng: -96.6608 }, eventCategory: "Football", imageURL: "https://www.oneathletic.com/cdn/shop/files/one-athletic-tracksuit-running.jpg", prevAttended: 4 },
+        // { studentName: "Testing User", studentId: "123456", event: "Allen v. North Crowley", eventCoordinates: { lat: 32.92968306464252, lng: -97.11231812644931 }, studentLoc: { lat: 32.92968306464252, lng: -97.11371812644931 }, eventCategory: "Football", imageURL: "https://www.oneathletic.com/cdn/shop/files/OA-101.jpg", prevAttended: 6 },
+        // { studentName: "Other Kaplan", studentId: "123456", event: "Allen v. North Crowley", eventCoordinates: { lat: 32.92968306464252, lng: -97.11231812644931 }, studentLoc: { }, eventCategory: "Football", imageURL: "https://i.pinimg.com/474x/2c/59/67/2c59674a6afc97d7d239f824cc577567.jpg", prevAttended: 0 },
     ]);
     const [chosenCheckIn, setChosenCheckIn] = React.useState(0);
 
     React.useEffect(() => {
-        fetch(process.env.REACT_APP_API_URL + "/api/missing-requests")
+        fetch(`${process.env.PUBLIC_URL}/admin/api/missingPoints`)
         .then(response => response.json())
         .then(data => {
             setRequests(data);
@@ -55,12 +57,12 @@ function MissingPointsCarousel(props) {
         >
             <div className="text-4xl font-bold flex flex-row gap-0 max-md:flex-col max-md:gap-4">
                 <span className='text-left flex-1 max-md:text-center'>
-                    <b>Event: </b>{requests[chosenCheckIn].event}
+                    <b>Event: </b>{requests[chosenCheckIn].eventName}
                 </span>
                 <span className='text-center flex-1 font-bold'>
                     {requests[chosenCheckIn].studentName}
                     <br />
-                    {requests[chosenCheckIn].studentId}
+                    {requests[chosenCheckIn].studentID}
                 </span>
                 <span className='text-right flex-1 max-md:text-center'>
                     Prev. Attended <b>{requests[chosenCheckIn].prevAttended} {requests[chosenCheckIn].eventCategory}</b> Events
@@ -71,7 +73,7 @@ function MissingPointsCarousel(props) {
                     <LazyLoadImage
                         id='checkInImage'
                         alt={requests[chosenCheckIn].studentName + "'s Check-In"}
-                        src={requests[chosenCheckIn].imageURL}
+                        src={requests[chosenCheckIn].studentImagePath ? `${process.env.PUBLIC_URL}/pictures/missingPoints/${requests[chosenCheckIn].studentImagePath}` : PlaceholderImage}
                         height={400}
                         className='min-w-[225px] bg-gray-100 rounded-xl shadow-xl h-[400px]'
                     />
@@ -83,9 +85,9 @@ function MissingPointsCarousel(props) {
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        <Circle center={requests[chosenCheckIn].eventCoordinates} radius={200}>
+                        <Circle center={{ lat: requests[chosenCheckIn].eventLatitude, lng: requests[chosenCheckIn].eventLongitude }} radius={requests[chosenCheckIn].eventRadius}>
                             <Marker
-                                position={requests[chosenCheckIn].eventCoordinates}
+                                position={{ lat: requests[chosenCheckIn].eventLatitude, lng: requests[chosenCheckIn].eventLongitude }}
                                 icon={new L.DivIcon({
                                     html: ReactDOMServer.renderToString(<FontAwesomeIcon icon={faLocationDot} size='2xl' />),
                                     iconSize: [18, 24],
@@ -93,13 +95,13 @@ function MissingPointsCarousel(props) {
                                 })}
                             >
                                 <Popup>
-                                    {requests[chosenCheckIn].event}
+                                    {requests[chosenCheckIn].eventName}
                                 </Popup>
                             </Marker>
                         </Circle>
-                        { requests[chosenCheckIn].studentLoc && (Object.keys(requests[chosenCheckIn].studentLoc).length > 0) ?
+                        { requests[chosenCheckIn].studentLatitude && requests[chosenCheckIn].studentLongitude ?
                             <Marker
-                                position={requests[chosenCheckIn].studentLoc}
+                                position={{lat: requests[chosenCheckIn].studentLatitude, lng: requests[chosenCheckIn].studentLongitude}}
                                 icon={new L.DivIcon({
                                         html: ReactDOMServer.renderToString(<FontAwesomeIcon icon={faLocationDot} size='2xl' />),
                                         iconSize: [18, 24],
@@ -112,7 +114,7 @@ function MissingPointsCarousel(props) {
                             </Marker>
                         : null }
                     </MapContainer>
-                    { !requests[chosenCheckIn].studentLoc || (Object.keys(requests[chosenCheckIn].studentLoc).length === 0) ?
+                    { !requests[chosenCheckIn].studentLatitude || !requests[chosenCheckIn].studentLongitude ?
                         <div className='absolute right-6 top-4 text-right z-50'>
                             <span className='text-xl font-bold text-red-600'>
                                 No Student Location Data
