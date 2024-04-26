@@ -184,6 +184,7 @@ class ProfileActivity : AppCompatActivity() {
 
                     val gradeSpinner : Spinner = findViewById(R.id.gradeSpinner)
                     val houseSpinner : Spinner = findViewById(R.id.houseSpinner)
+                    // disables editing
                     gradeSpinner.isClickable = false
                     gradeSpinner.isEnabled = false
                     houseSpinner.isClickable = false
@@ -235,6 +236,7 @@ class ProfileActivity : AppCompatActivity() {
         editBtn.setOnClickListener {
             nameTxt.isEnabled = true
 
+            //enable edits
             gradeSpinner.isClickable = true
             gradeSpinner.isEnabled = true
             houseSpinner.isClickable = true
@@ -251,6 +253,7 @@ class ProfileActivity : AppCompatActivity() {
             nameTxt.isEnabled = false
             nameTxt.setText(name)
 
+            //disable edits
             gradeSpinner.isClickable = false
             gradeSpinner.isEnabled = false
             houseSpinner.isClickable = false

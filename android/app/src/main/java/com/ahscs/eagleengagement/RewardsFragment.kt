@@ -43,6 +43,7 @@ class RewardsFragment(jwt: String) : Fragment() {
         return view
     }
 
+    // get list of rewards
     private fun getRewards(jwt: String, adapter: RewardAdapter) : MutableList<DataModel.RewardResponse> {
         var rewardList = mutableListOf <DataModel.RewardResponse>()
 

@@ -30,6 +30,7 @@ class RequestActivity : AppCompatActivity() {
     var jwt : String? = null
     var events = mutableMapOf<String, Int>()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_point_requests_page)
@@ -64,6 +65,7 @@ class RequestActivity : AppCompatActivity() {
         configureBtns()
     }
 
+    // submit missing point request using api
     fun submit(jwt: String, data: DataModel.MissingRequest) {
         var url = resources.getString(R.string.api_link)
         val retrofit = Retrofit.Builder()
@@ -101,6 +103,7 @@ class RequestActivity : AppCompatActivity() {
         })
     }
 
+    // use api to get list of past events and add to the drop down
     fun loadPastEvents(jwt: String) : MutableMap<String, Int> {
         var url = resources.getString(R.string.api_link)
         var events = mutableMapOf<String, Int>()
@@ -168,6 +171,7 @@ class RequestActivity : AppCompatActivity() {
 
             val isLocationChecked = findViewById<AppCompatCheckBox>(R.id.checkBoxSendLocation).isChecked
 
+            // if location is requested to be sent, send the location data
             if (isLocationChecked) {
                 if (ActivityCompat.checkSelfPermission(
                         this,

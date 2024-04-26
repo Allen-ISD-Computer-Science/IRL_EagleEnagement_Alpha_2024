@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat
 
 class RewardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    //update reward info
     fun updateInfo(info: DataModel.RewardResponse) {
         var name : TextView = itemView.findViewById(R.id.txtRewardName)
         name.text = info.name
@@ -41,6 +42,7 @@ class RewardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         readMore.visibility = View.VISIBLE
     }
 
+    //toggle read more
     fun toggleRead() {
         var readMore : TextView = itemView.findViewById(R.id.txtReadMoreBtn)
         if (readMore.visibility == View.VISIBLE) {
@@ -62,6 +64,7 @@ class RewardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
+    // purchase a reward with api
     fun buyReward(data: DataModel.RewardResponse, fragment: RewardsFragment) {
         val id = data.id
         var url = fragment.resources.getString(R.string.api_link)
