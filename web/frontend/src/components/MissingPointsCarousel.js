@@ -12,30 +12,33 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import PlaceholderImage from '../assets/placeholder.svg';
 
 function MissingPointsCarousel(props) {
-    function MapRefComponent() {
-        console.log(chosenCheckIn, requests[chosenCheckIn])
+    function MapRefComponent(props) {
+	const req = props.request;
 
-        const latLngs = [requests[chosenCheckIn].eventCoordinates]
+        const latLngs = req.eventLatitude ? [{ lat: req.eventLatitude, lng: req.eventLongitude }] : [{lat: 33.1097, lng: -96.6608}];
+	console.log(latLngs);
+	
         var bounds = null;
-        if (requests[chosenCheckIn].studentLoc && Object.keys(requests[chosenCheckIn].studentLoc).length > 0) {
-            latLngs.push(requests[chosenCheckIn].studentLoc)
-            bounds = new L.latLngBounds(...latLngs)
+        if (req.studentLatitude && req.studentLongitude) {
+	    latLngs.push({ lat: req.studentLatitude, lng: req.studentLongitude })
+	    bounds = new L.latLngBounds(...latLngs)
         } else {
-            bounds = new L.latLng(latLngs[0], 100);
-            bounds = bounds.toBounds(200);
+	    bounds = new L.latLng(latLngs[0], 100);
+	    bounds = bounds.toBounds(200);
         }
-    
+	
         useMap().fitBounds(bounds);
-    
+	
         console.log('bounds:', bounds);
         console.log('map center:', useMap().getCenter())
         
         return null
-    }  
+    }
 
     const [isBlurred, setIsBlurred] = React.useState(false);
 
     const [requests, setRequests] = React.useState([
+	{},
         // { studentName: "Brett Kaplan", studentId: "123456", event: "Allen v. North Crowley", eventCoordinates: { lat: 32.92968306464252, lng: -97.11231812644931 }, studentLoc: { lat: 33.1097, lng: -96.6608 }, eventCategory: "Football", imageURL: "https://www.oneathletic.com/cdn/shop/files/one-athletic-tracksuit-running.jpg", prevAttended: 4 },
         // { studentName: "Testing User", studentId: "123456", event: "Allen v. North Crowley", eventCoordinates: { lat: 32.92968306464252, lng: -97.11231812644931 }, studentLoc: { lat: 32.92968306464252, lng: -97.11371812644931 }, eventCategory: "Football", imageURL: "https://www.oneathletic.com/cdn/shop/files/OA-101.jpg", prevAttended: 6 },
         // { studentName: "Other Kaplan", studentId: "123456", event: "Allen v. North Crowley", eventCoordinates: { lat: 32.92968306464252, lng: -97.11231812644931 }, studentLoc: { }, eventCategory: "Football", imageURL: "https://i.pinimg.com/474x/2c/59/67/2c59674a6afc97d7d239f824cc577567.jpg", prevAttended: 0 },
@@ -43,7 +46,7 @@ function MissingPointsCarousel(props) {
     const [chosenCheckIn, setChosenCheckIn] = React.useState(0);
 
     React.useEffect(() => {
-        fetch(`${process.env.PUBLIC_URL}/admin/api/missingPoints`)
+        fetch(`${process.env.PUBLIC_URL}/admin/api/missingPoints`, { method: "POST" })
         .then(response => response.json())
         .then(data => {
             setRequests(data);
@@ -80,14 +83,14 @@ function MissingPointsCarousel(props) {
                 </div>
                 <div className='p-4 flex-1 [&>*]:w-full [&>*]:h-[400px] [&>*:first-child]:z-40 relative'>
                     <MapContainer center={{lat: 33.1097, lng: -96.6608}} zoom={13} scrollWheelZoom={true}>
-                        <MapRefComponent />
+                        <MapRefComponent request={requests[chosenCheckIn]} />
                         <TileLayer
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        <Circle center={{ lat: requests[chosenCheckIn].eventLatitude, lng: requests[chosenCheckIn].eventLongitude }} radius={requests[chosenCheckIn].eventRadius}>
+                        <Circle center={{ lat: requests[chosenCheckIn].eventLatitude || 33.1097, lng: requests[chosenCheckIn].eventLongitude || -96.6608 }} radius={requests[chosenCheckIn].eventRadius || 200}>
                             <Marker
-                                position={{ lat: requests[chosenCheckIn].eventLatitude, lng: requests[chosenCheckIn].eventLongitude }}
+                                position={{ lat: requests[chosenCheckIn].eventLatitude || 33.1097, lng: requests[chosenCheckIn].eventLongitude || -96.6608}}
                                 icon={new L.DivIcon({
                                     html: ReactDOMServer.renderToString(<FontAwesomeIcon icon={faLocationDot} size='2xl' />),
                                     iconSize: [18, 24],
