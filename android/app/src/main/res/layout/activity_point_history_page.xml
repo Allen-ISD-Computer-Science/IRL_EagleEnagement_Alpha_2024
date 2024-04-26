@@ -36,6 +36,7 @@
                     android:layout_marginStart="@dimen/_66pxh"
                     android:layout_marginTop="@dimen/_22pxv"
                     android:layout_weight="0.93"
+                    android:textAlignment="center"
                     android:layout_width="0dp" android:singleLine="true"
                     android:text="@string/lbl_point_history"
                     style="@style/txt" tools:text="@string/lbl_point_history"/>
@@ -43,14 +44,12 @@
         </androidx.appcompat.widget.Toolbar>
         <androidx.recyclerview.widget.RecyclerView
             android:gravity="center_horizontal"
-            android:id="@+id/recyclerListallenvnorth"
+            android:id="@+id/pointHistoryRecycler"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_27pxh"
-            android:layout_marginStart="@dimen/_27pxh"
-            android:layout_marginTop="@dimen/_18pxv"
+            android:layout_marginEnd="18dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            itemSpace="@{@dimen/_19pxh}" tools:itemCount="2" tools:listitem="@layout/row_point_history"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </RelativeLayout>

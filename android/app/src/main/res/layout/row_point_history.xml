@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
-    <data/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <LinearLayout android:gravity="start"
         android:id="@+id/linearEngagmentInfo"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_marginBottom="20dp"
+        android:paddingBottom="0dp"
         android:orientation="vertical" style="@style/groupStylecornerRadius_1">
         <LinearLayout android:id="@+id/linearRowallenvnorth"
             android:layout_height="wrap_content"
@@ -13,7 +18,7 @@
             android:layout_marginTop="@dimen/_6pxv"
             android:layout_width="match_parent" android:orientation="horizontal">
             <TextView android:ellipsize="end"
-                android:id="@+id/txtAllenvNorth"
+                android:id="@+id/txtReason"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_1pxv"
                 android:layout_weight="0.87" android:layout_width="0dp"
@@ -30,19 +35,19 @@
                     android:layout_height="@dimen/_33pxh"
                     android:layout_marginTop="@dimen/_1pxv" android:layout_width="@dimen/_33pxh"/>
                 <TextView android:ellipsize="end"
-                    android:gravity="top|start" android:id="@+id/txtOne"
+                    android:gravity="top|start" android:id="@+id/txtPointsWorth"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_6pxh"
                     android:layout_marginStart="@dimen/_6pxh"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:singleLine="true"
                     android:text="@string/lbl_12"
                     style="@style/txtKanitextrabold24" tools:text="@string/lbl_12"/>
             </FrameLayout>
         </LinearLayout>
         <TextView android:ellipsize="end"
-            android:id="@+id/txtEventCheckIn"
+            android:id="@+id/txtDate"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_15pxv"
             android:layout_marginEnd="@dimen/_16pxh"
@@ -50,7 +55,7 @@
             android:layout_marginTop="@dimen/_1pxv"
             android:layout_width="wrap_content"
             android:singleLine="true"
-            android:text="@string/lbl_event_check_in"
-            style="@style/txtKhulaextrabold16_2" tools:text="@string/lbl_event_check_in"/>
+            android:text="October 10, 2023"
+            style="@style/txtKhulaextrabold16_2"/>
     </LinearLayout>
-</layout>
+</RelativeLayout>

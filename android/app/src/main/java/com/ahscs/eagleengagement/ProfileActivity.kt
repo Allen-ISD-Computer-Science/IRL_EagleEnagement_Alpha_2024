@@ -218,7 +218,9 @@ class ProfileActivity : AppCompatActivity() {
 
         val pointHistoryBtn = findViewById<ImageView>(R.id.profilePointHistoryBtn)
         pointHistoryBtn.setOnClickListener {
-            startActivity(Intent(this, PointHistoryActivity::class.java))
+            val intent = Intent(this, PointHistoryActivity::class.java)
+            intent.putExtra("jwt", jwt)
+            startActivity(intent)
         }
 
         val nameTxt : EditText = findViewById(R.id.nameTxt)

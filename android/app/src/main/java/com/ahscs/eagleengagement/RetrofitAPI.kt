@@ -49,4 +49,13 @@ interface RetrofitAPI {
 
     @POST("reward/{id}/purchase")
     fun postBuyReward(@Header("Authorization") authToken: String, @Path("id") rewardId: String): Call<DataModel.Response>
+
+    @POST("pointHistory")
+    fun postPointHistory(@Header ("Authorization") authToken: String): Call<MutableList<DataModel.PointHistoryResponse>>
+
+    @POST("events/past")
+    fun postEventPast(@Header ("Authorization") authToken: String): Call<MutableList<DataModel.PastEventsResponse>>
+
+    @POST("missingPoints/request")
+    fun postMissingPoints(@Header ("Authorization") authToken: String, @Body dataModel: DataModel.MissingRequest): Call<DataModel.Response>
 }

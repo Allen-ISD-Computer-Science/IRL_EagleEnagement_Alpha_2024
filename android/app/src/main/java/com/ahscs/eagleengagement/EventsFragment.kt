@@ -100,7 +100,9 @@ class EventsFragment(jwt: String) : Fragment() {
 
         val requestBtn = view.findViewById<LinearLayout>(R.id.eventRequestBtn)
         requestBtn.setOnClickListener {
-            activity?.startActivity(Intent(activity, RequestActivity::class.java))
+            val intent = Intent(activity, RequestActivity::class.java)
+            intent.putExtra("jwt", jwt)
+            activity?.startActivity(intent)
         }
     }
 

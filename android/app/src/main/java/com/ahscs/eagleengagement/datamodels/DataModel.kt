@@ -1,5 +1,6 @@
 package com.ahscs.eagleengagement.datamodels
 
+import java.io.File
 import java.util.Date
 
 sealed class DataModel {
@@ -76,6 +77,31 @@ sealed class DataModel {
         var name: String,
         var description: String,
         var cost: Int
+    ) : DataModel()
+
+    data class PointHistoryResponse(
+        var reason: String,
+        var points: Int,
+        var date: Date
+    ) : DataModel()
+
+    data class PastEventsResponse(
+        var id: Int,
+        var name: String,
+        var eventType: String,
+        var locationName: String,
+        var pointsWorth: Int,
+        var startDate: Date,
+        var endDate: Date
+    ) : DataModel()
+
+    data class MissingRequest(
+        var eventID: Int,
+        var reason: String,
+        var picture: File?,
+        var latitude: Float?,
+        var longitude: Float?,
+        var accuracy: Float?
     ) : DataModel()
 
     data class Response(

@@ -184,39 +184,55 @@ class EventActivity : AppCompatActivity() {
         }
 
         val checkinBtn = findViewById<AppCompatButton>(R.id.btnCheckin)
-        checkinBtn.setOnClickListener {
+        try {
+            checkinBtn.setOnClickListener {
 
-
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                }
+                fusedLocationClient.lastLocation
+                    .addOnSuccessListener { location ->
+                        try {
+                            // getting the last known or current location
+                            val latitude = location.latitude
+                            val longitude = location.longitude
+                            val accuracy = location.accuracy
+                            println("JWT: $jwt")
+                            checkIn(jwt!!, eventId!!, latitude, longitude, accuracy.toDouble())
+                        } catch (e: Exception) {
+                            val builder = AlertDialog.Builder(this@EventActivity, com.google.android.material.R.style.Theme_AppCompat_Dialog_Alert)
+                            builder.setCancelable(true)
+                            builder.setTitle("Location Unknown!")
+                            builder.setMessage("Unable to obtain your current location! Please try again later.")
+                            builder.setNeutralButton("Ok") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            builder.show()
+                        }
+                    }
+                    .addOnFailureListener {
+                        println("Location getting failed ${it.message}")
+                        Toast.makeText(
+                            this, "Failed on getting current location",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
             }
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location ->
-                    // getting the last known or current location
-                    val latitude = location.latitude
-                    val longitude = location.longitude
-                    val accuracy = location.accuracy
-                    println("JWT: $jwt")
-                    checkIn(jwt!!, eventId!!, latitude, longitude, accuracy.toDouble())
-                }
-                .addOnFailureListener {
-                    println("Location getting failed ${it.message}")
-                    Toast.makeText(this, "Failed on getting current location",
-                        Toast.LENGTH_SHORT).show()
-                }
+        } catch (e: Exception) {
+            println(e.message)
         }
 
         val directionsBtn = findViewById<ImageView>(R.id.btnDirections)
