@@ -6,7 +6,7 @@ import FluentMySQLDriver
 final public class StudentUser: Model, Content {
     // Name of the table or collection.
     public static let schema = "StudentUsers"
-
+    
     /// Unique identifier for this StudentUser
     @ID(custom: "id", generatedBy: .database)
     public var id: Int?

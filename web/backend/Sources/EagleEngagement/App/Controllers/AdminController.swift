@@ -54,6 +54,9 @@ struct AdminController : RouteCollection {
         apiRoutes.post("reward", ":id", use: fetchReward);
         apiRoutes.post("reward", ":id", "edit", use: editReward);
         apiRoutes.post("rewards", "new", use: newReward);
+
+        apiRoutes.post("missingPoints", use: fetchMissingPoints);
+        apiRoutes.post("missingPoints", ":id", "delete", use: deleteMissingPoints);
     }
 
     // Serves the react page
@@ -176,7 +179,7 @@ struct AdminController : RouteCollection {
         }
 
         for sUser in studentUsers {
-            let pointHistory = PointHistory(user: sUser, reason: args.reason, points: args.points);
+            let pointHistory = PointHistory(user: sUser.user, reason: args.reason, points: args.points);
             try await pointHistory.save(on: req.db);
             
             sUser.points = sUser.points + args.points;
@@ -204,7 +207,7 @@ struct AdminController : RouteCollection {
             throw Abort(.badRequest);
         }
 
-        let pointHistory = PointHistory(user: studentUser, reason: args.reason, points: args.points);
+        let pointHistory = PointHistory(user: studentUser.user, reason: args.reason, points: args.points);
         try await pointHistory.save(on: req.db);
         
         studentUser.points = studentUser.points + args.points;
@@ -602,6 +605,51 @@ struct AdminController : RouteCollection {
         try await reward.save(on: req.db);
 
         return Msg(success: true, msg: "Updated Reward!");
+    }
+
+    struct PointRequestInfo : Content {
+        var id: Int;
+        var eventID: Int;
+        var eventName: String;
+
+        var userID: Int;
+        var studentName: String;
+        var studentID: Int;
+        var reason: String;
+        var checkedInPreviously: Int;
+
+        var eventPoints: Int;
+        var eventLatitude: Float;
+        var eventLongitude: Float;
+        var eventRadius: Float;
+
+        var studentLatitude: Float?;
+        var studentLongitude: Float?;
+        var studentImagePath: String?;
+    }
+
+    func fetchMissingPoints(_ req: Request) async throws -> [PointRequestInfo] {
+        let pointRequests = try await PointRequest.query(on: req.db)
+          .join(StudentUser.self, on: \PointRequest.$user.$id == \StudentUser.$id)
+          .join(User.self, on: \StudentUser.$user.$id == \User.$id)
+          .join(Events.self, on: \PointRequest.$event.$id == \Events.$id)
+          .join(Location.self, on: \Events.$location.$id == \Location.$id)
+          .sort(\.$date, .descending)
+          .all()
+          .map { h in
+              let studentUser = try h.joined(StudentUser.self);
+              let user = try h.joined(User.self);
+              var event = try h.joined(Events.self);
+              let loc = try h.joined(Location.self);
+              
+              return PointRequestInfo.init(id: h.id!, eventID: event.id!, eventName: event.name, userID: user.id!, studentName: user.name, studentID: studentUser.studentID, reason: h.reason, checkedInPreviously: Int.random(in: 1..<20), eventPoints: event.pointsWorth, eventLatitude: loc.latitude, eventLongitude: loc.longitude, eventRadius: loc.radius, studentLatitude: h.latitude, studentLongitude: h.longitude, studentImagePath: h.imagePath);
+          };
+
+        return pointRequests;
+    }
+
+    func deleteMissingPoints(_ req: Request) async throws -> Msg {
+        return Msg(success: true, msg: "Hi!");
     }
     
 }

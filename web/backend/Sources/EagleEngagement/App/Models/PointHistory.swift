@@ -28,7 +28,7 @@ final public class PointHistory: Model, Content {
     // Creates a new, empty PointHistory
     public init() { }
 
-    public init(user: StudentUser, reason: String, points: Int) {
+    public init(user: User, reason: String, points: Int) {
         self.$user.id = user.id!;
         self.reason = reason;
         self.points = points;

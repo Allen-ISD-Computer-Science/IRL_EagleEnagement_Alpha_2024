@@ -14,16 +14,16 @@ final public class PointRequest: Model, Content {
     public static let schema = "PointRequests"
 
     // Auto generated ID
-    @ID(key: .id)
-    public var id: UUID?
+    @ID(custom: "id", generatedBy: .database)
+    public var id: Int?
 
     // userID linking to a User Object
-    @Field(key: "userID")
-    public var userID: Int
+    @Parent(key: "userID")
+    public var user: StudentUser
 
     // eventID linking to an Event
-    @Field(key: "eventID")
-    public var eventID: Int
+    @Parent(key: "eventID")
+    public var event: Events
 
     // Reason for the request
     @Field(key: "reason")
@@ -48,13 +48,17 @@ final public class PointRequest: Model, Content {
     // imagePath to the file the user uploaded (optional)
     @Field(key: "imagePath")
     public var imagePath: String?
+
+    // Enables soft delete - for logs.
+    @Timestamp(key: "deleted_at", on: .delete)
+    var deletedAt: Date?
     
     // Creates a new, empty PointRequest.
     public init() { }
 
     public init(userID: Int, eventID: Int, reason: String, imagePath: String?, latitude: Float?, longitude: Float?) {
-        self.userID = userID;
-        self.eventID = eventID;
+        self.$user.id = userID;
+        self.$event.id = eventID;
         self.reason = reason;
         self.date = Date();
         self.status = .unseen;

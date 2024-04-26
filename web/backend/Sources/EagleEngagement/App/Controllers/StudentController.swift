@@ -407,7 +407,7 @@ struct StudentController : RouteCollection {
         studentUser.points = studentUser.points + event.pointsWorth;
         try await studentUser.save(on: req.db);
 
-        let pointHistory = PointHistory(user: studentUser, reason: event.name, points: event.pointsWorth);
+        let pointHistory = PointHistory(user: studentUser.user, reason: event.name, points: event.pointsWorth);
         try await pointHistory.save(on: req.db);
 
         let eventCheckIn = EventCheckIns(user: studentUser.user, event: event, deviceUUID: args.deviceUUID, latitude: args.latitude, longitude: args.longitude);
@@ -538,7 +538,7 @@ struct StudentController : RouteCollection {
         studentUser.points = studentUser.points - reward.cost;
         try await studentUser.save(on: req.db);
 
-        let pointHistory = PointHistory(user: studentUser, reason: "Purchased \(reward.id) \(reward.name)", points: -reward.cost);
+        let pointHistory = PointHistory(user: studentUser.user, reason: "Purchased \(reward.id) \(reward.name)", points: -reward.cost);
         try await pointHistory.save(on: req.db);
 
         return Msg(success: true, msg: "Purchased \(reward.name)");
