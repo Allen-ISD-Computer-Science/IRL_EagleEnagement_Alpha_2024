@@ -90,7 +90,7 @@ class RequestActivity : AppCompatActivity() {
                         dialog.dismiss()
                     }
                     builder.show()
-                }else{
+                } else {
                     println(response.raw().toString())
                 }
             }

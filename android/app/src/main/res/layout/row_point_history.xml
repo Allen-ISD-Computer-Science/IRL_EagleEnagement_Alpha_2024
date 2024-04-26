@@ -25,26 +25,20 @@
                 android:singleLine="true"
                 android:text="@string/msg_allen_v_north"
                 style="@style/txtKhulaextrabold20" tools:text="@string/msg_allen_v_north"/>
-            <FrameLayout android:id="@+id/frameStackellipsefortynine"
-                android:layout_height="@dimen/_34pxv"
-                android:layout_marginStart="@dimen/_24pxh" android:layout_width="@dimen/_33pxh">
-                <View
-                    android:background="@drawable/rectangle_bg_indigo_901_radius_16_5"
-                    android:id="@+id/viewEllipseFortyNine"
-                    android:layout_gravity="start"
-                    android:layout_height="@dimen/_33pxh"
-                    android:layout_marginTop="@dimen/_1pxv" android:layout_width="@dimen/_33pxh"/>
-                <TextView android:ellipsize="end"
-                    android:gravity="top|start" android:id="@+id/txtPointsWorth"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_6pxh"
-                    android:layout_marginStart="@dimen/_6pxh"
-                    android:layout_width="wrap_content"
-                    android:singleLine="true"
-                    android:text="@string/lbl_12"
-                    style="@style/txtKanitextrabold24" tools:text="@string/lbl_12"/>
-            </FrameLayout>
+            <TextView android:ellipsize="end"
+                android:id="@+id/txtPointsWorth"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_width="wrap_content"
+                android:paddingBottom="@dimen/_3pxv"
+                android:paddingEnd="@dimen/_4pxh"
+                android:paddingStart="@dimen/_4pxh"
+                android:paddingTop="@dimen/_1pxv"
+                android:singleLine="true"
+                android:text="0"
+                style="@style/txtGradientRounded" />
         </LinearLayout>
         <TextView android:ellipsize="end"
             android:id="@+id/txtDate"
