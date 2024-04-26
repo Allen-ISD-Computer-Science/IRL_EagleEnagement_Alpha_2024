@@ -64,7 +64,7 @@ function NewEditClubPage(props) {
 		}
 
 		const filteredInfo = Object.assign({}, clubInfo);
-		delete clubInfo.id;
+	        delete clubInfo.id;
 		filteredInfo.latitude = parseFloat(filteredInfo.latitude);
 		filteredInfo.longitude = parseFloat(filteredInfo.longitude);
 		filteredInfo.radius = parseInt(filteredInfo.radius);
@@ -116,7 +116,6 @@ function NewEditClubPage(props) {
 			if (res.status === 200) {
 				toast.success(`${isNew ? "Created" : "Updated"} club!`);
 
-				if (isNew) {
 					if (filteredInfo.clugLogo !== "" && clubLogoRef.current !== null && clubLogoRef.current?.files.length > 0) {
 						setRequests((prev) => prev + 1);
 
@@ -145,7 +144,7 @@ function NewEditClubPage(props) {
 
 						try {
 							const formData = new FormData();
-							formData.append("picture", filteredInfo.clubThumbnail);
+						    formData.append("picture", clubThumbnailRef.current.files[0]);
 							const res = await fetch(`${process.env.PUBLIC_URL}/pictures/clubThumbnails/${clubID}/upload`, {
 								method: "POST",
 								body: formData
@@ -161,7 +160,6 @@ function NewEditClubPage(props) {
 						} catch(err) {
 							setRequests((prev) => prev - 1);
 						}
-					}
 				}
 			} else {
 				const json = await res.json();

@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/vapor/brett-kaplan/static/css/main.ceacae33.css",
-    "main.js": "/vapor/brett-kaplan/static/js/main.896da122.js",
+    "main.js": "/vapor/brett-kaplan/static/js/main.491a16b1.js",
     "static/media/placeholder-4x3.svg": "/vapor/brett-kaplan/static/media/placeholder-4x3.ce753c1201b545fd4ace526dda36e2da.svg",
     "static/media/placeholder.svg": "/vapor/brett-kaplan/static/media/placeholder.086d5f35d3476f8ffd88e10aa83699a2.svg",
     "index.html": "/vapor/brett-kaplan/index.html",
     "main.ceacae33.css.map": "/vapor/brett-kaplan/static/css/main.ceacae33.css.map",
-    "main.896da122.js.map": "/vapor/brett-kaplan/static/js/main.896da122.js.map"
+    "main.491a16b1.js.map": "/vapor/brett-kaplan/static/js/main.491a16b1.js.map"
   },
   "entrypoints": [
     "static/css/main.ceacae33.css",
-    "static/js/main.896da122.js"
+    "static/js/main.491a16b1.js"
   ]
 }

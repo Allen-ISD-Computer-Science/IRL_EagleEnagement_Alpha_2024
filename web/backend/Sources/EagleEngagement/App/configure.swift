@@ -72,6 +72,8 @@ func configure(_ app: Application) throws {
     }
     app.http.server.configuration.hostname = hostname
 
+    app.routes.defaultMaxBodySize = "2mb"
+
     // register routes
     try routes(app)
 }

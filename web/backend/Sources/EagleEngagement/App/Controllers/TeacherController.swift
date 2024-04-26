@@ -12,7 +12,7 @@ struct TeacherController : RouteCollection {
         let apiRoutes = teacherProtectedRoutes.grouped("api"); // /faculty/api
         apiRoutes.post("clubs", use: fetchClubs);
         apiRoutes.post("club", ":id", use: fetchClub);
-        apiRoutes.post("club", ":id", use: editClub);
+        apiRoutes.post("club", ":id", "edit", use: editClub);
 
         apiRoutes.post("requestEvent", use: requestEvent);
     }
@@ -94,7 +94,6 @@ struct TeacherController : RouteCollection {
     }
 
     struct ManageClubInfo : Content {
-        var id: Int;
         var name: String;
         var description: String;
         var meetingTimes: String?;
@@ -134,13 +133,17 @@ struct TeacherController : RouteCollection {
             throw Abort(.unauthorized);
         }
 
+        guard let id = req.parameters.get("id", as: Int.self) else {
+            throw Abort(.badRequest)
+        }
+
         let args = try req.content.decode(ManageClubInfo.self);
           
         let clubSponsorOpt = try await ClubSponsorUser.query(on: req.db)
           .with(\.$user)
           .with(\.$club)
           .filter(\.$user.$id == user.id!)
-          .filter(\.$club.$id == args.id)
+          .filter(\.$club.$id == id)
           .first();
         
         guard let clubSponsor = clubSponsorOpt else {
