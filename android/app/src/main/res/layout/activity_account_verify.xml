@@ -41,9 +41,22 @@
                     <FrameLayout
                         android:id="@+id/frameStacksignup"
                         android:layout_width="@dimen/_335pxh"
-                        android:layout_height="230dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_30sp"
                         android:layout_gravity="start">
+
+                        <ImageView
+                            android:id="@+id/img_eagleEngagementLogo"
+                            android:layout_width="275dp"
+                            android:layout_height="150dp"
+                            android:layout_gravity="top|center"
+                            android:layout_marginHorizontal="50dp"
+                            android:layout_marginStart="@dimen/_92pxh"
+                            android:layout_marginEnd="@dimen/_92pxh"
+                            android:layout_marginBottom="@dimen/_70pxv"
+                            android:scaleType="fitXY"
+                            tools:ignore="ContentDescription"
+                            tools:src="@drawable/cedu_logo" />
 
                         <TextView
                             android:id="@+id/txtAcctVerify"
@@ -52,7 +65,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|center"
                             android:layout_marginStart="@dimen/_28pxh"
-                            android:layout_marginTop="@dimen/_16pxv"
+                            android:layout_marginTop="@dimen/_40pxv"
                             android:layout_marginEnd="@dimen/_28pxh"
                             android:layout_marginBottom="@dimen/_16pxv"
                             android:ellipsize="end"
@@ -60,20 +73,6 @@
                             android:singleLine="true"
                             android:text="@string/lbl_account_verification"
                             tools:text="@string/lbl_account_verification" />
-
-
-                        <ImageView
-                            android:id="@+id/img_eagleEngagementLogo"
-                            android:layout_width="315dp"
-                            android:layout_height="233dp"
-                            android:layout_gravity="top|center"
-                            android:layout_marginHorizontal="50dp"
-                            android:layout_marginStart="@dimen/_92pxh"
-                            android:layout_marginEnd="@dimen/_92pxh"
-                            android:layout_marginBottom="@dimen/_10pxv"
-                            android:scaleType="fitXY"
-                            tools:ignore="ContentDescription"
-                            tools:src="@drawable/img_eagle_engagement_logo" />
 
                     </FrameLayout>
 

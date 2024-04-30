@@ -54,16 +54,16 @@
                                 style="@style/txt_1" tools:text="@string/lbl_login"/>
                             <ImageView
                                 android:id="@+id/img_eagleEngagementLogo"
-                                android:layout_width="315dp"
-                                android:layout_height="233dp"
+                                android:layout_width="290dp"
+                                android:layout_height="170dp"
                                 android:layout_gravity="top|center"
                                 android:layout_marginHorizontal="50dp"
                                 android:layout_marginStart="@dimen/_92pxh"
                                 android:layout_marginEnd="@dimen/_92pxh"
-                                android:layout_marginBottom="@dimen/_10pxv"
+                                android:layout_marginBottom="@dimen/_70pxv"
                                 android:scaleType="fitXY"
                                 tools:ignore="ContentDescription"
-                                android:src="@drawable/img_eagle_engagement_logo" />
+                                tools:src="@drawable/cedu_logo" />
                         </FrameLayout>
                         <TextView android:ellipsize="end"
                             android:id="@+id/txtEmail"
