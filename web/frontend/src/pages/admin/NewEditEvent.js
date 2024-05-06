@@ -108,7 +108,10 @@ function NewEditEventPage(props) {
 
       setRequests((prev) => prev + 1);
       getRequest().then((req) => {
-        setEventRequest(req);
+        setEventRequest({
+          ...req,
+          id: requestID
+        });
         setRequests((prev) => prev - 1);
       }).catch((err) => {
         setRequests((prev) => prev - 1);
